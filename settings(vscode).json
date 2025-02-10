@@ -1,0 +1,169 @@
+{
+    "$schema": "vscode://schemas/settings/default",
+    //extensions
+    "security.workspace.trust.untrustedFiles": "open",
+    "gitlens.defaultDateShortFormat": null,
+    "gitlens.defaultDateFormat": null,
+    "python.defaultInterpreterPath": "C:\\Program Files\\Python313\\python.exe",
+    "[c]": {
+        "editor.wordBasedSuggestions": "off",
+        "editor.suggest.insertMode": "replace",
+        "editor.semanticHighlighting.enabled": true
+    },
+    "workbench.startupEditor": "none",
+    "cmake.configureOnOpen": true,
+    "git.autofetch": true,
+    "workbench.editorAssociations": {
+        "*.docx": "default"
+    },
+    "workbench.editor.empty.hint": "hidden",
+    "cmake.options.statusBarVisibility": "visible",
+    "[dart]": {
+        "editor.rulers": [
+            80
+        ],
+        "editor.selectionHighlight": false,
+        "editor.suggestSelection": "first",
+        "editor.tabCompletion": "onlySnippets",
+        "editor.wordBasedSuggestions": "off"
+    },
+    "window.confirmSaveUntitledWorkspace": false,
+    "gitlens.rebaseEditor.ordering": "asc",
+    "[php]": {
+        "editor.defaultFormatter": "bmewburn.vscode-intelephense-client"
+    },
+    "workbench.iconTheme": "material-icon-theme",
+
+    //editor
+    "window.restoreWindows": "none",
+    "workbench.colorTheme": "Material Theme Darker",
+    "editor.formatOnPaste": true,
+    "editor.formatOnSave": true,
+    "editor.formatOnType": true,
+    "files.autoSave": "afterDelay",
+    "explorer.confirmDelete": false,
+    "window.titleBarStyle": "custom",
+    "explorer.expandSingleFolderWorkspaces": false,
+    "terminal.integrated.cursorBlinking": true,
+    "editor.cursorBlinking": "blink",
+    "editor.fontFamily": "Jetbrains Mono, Consolas, 'Courier New', monospace",
+    "editor.fontLigatures": true,
+    "editor.bracketPairColorization.enabled": true,
+    "editor.smoothScrolling": true,
+    "editor.mouseWheelZoom": true,
+    
+    //vim configuration
+    "vim.enableNeovim": true,
+    "vim.handleKeys": {
+        "<C-d>": true,
+        "<C-s>": false,
+        "<C-z>": false
+    },
+    "vim.relativenumber": true,
+    "vim.tabstop": 4,
+    "vim.softtabstop": 4,
+    "vim.shiftwidth": 4,
+    "vim.expandtab": true,
+    "vim.smartindent": true,
+    "vim.wrap": false,
+    "vim.swapfile": false,
+    "vim.backup": false,
+    "vim.undofile": true,
+    "vim.hlsearch": false,
+    "vim.incsearch": true,
+    "vim.termguicolors": true,
+    "vim.scrolloff": 8,
+    "vim.signcolumn": "yes",
+    "vim.updatetime": 50,
+    "vim.leader": " ",
+
+    // Vim Keybindings
+    "vim.normalModeKeyBindings": [
+        { "before": ["<leader>", "p", "v"], "commands": [":Ex"] },
+        { "before": ["J"], "after": ["m", "z", "J", "`", "z"] },
+        { "before": ["<C-d>"], "after": ["<C-d>", "z", "z"] },
+        { "before": ["<C-u>"], "after": ["<C-u>", "z", "z"] },
+        { "before": ["n"], "after": ["n", "z", "z", "z", "v"] },
+        { "before": ["N"], "after": ["N", "z", "z", "z", "v"] },
+        { "before": ["<leader>", "y"], "after": ["\"", "+", "y"] },
+        { "before": ["<leader>", "Y"], "after": ["\"", "+", "Y"] },
+        { "before": ["<leader>", "p"], "after": ["\"", "+", "p"] },
+        { "before": ["Q"], "commands": [] },
+        { "before": ["<leader>", "f"], "commands": ["editor.action.formatDocument"] },
+        { "before": ["<C-k>"], "commands": [":cnext"] },
+        { "before": ["<C-j>"], "commands": [":cprev"] },
+        { "before": ["<leader>", "k"], "commands": [":lnext"] },
+        { "before": ["<leader>", "j"], "commands": [":lprev"] },
+        { "before": ["<leader>", "s"], "commands": [":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI"] },
+        { "before": ["<leader>", "x"], "commands": [":!chmod +x %"] }
+    ],
+    "vim.visualModeKeyBindings": [
+        { "before": ["J"], "commands": [":m '>+1<CR>gv=gv"] },
+        { "before": ["K"], "commands": [":m '<-2<CR>gv=gv"] },
+        { "before": ["<leader>", "v"], "after": ["\"", "_", "d", "P"] },
+        { "before": ["<leader>", "y"], "after": ["\"", "+", "y"] },
+        { "before": ["<leader>", "p"], "after": ["\"", "+", "p"] }
+    ],
+    "vim.insertModeKeyBindings": [
+        { "before": ["<C-v>"], "after": ["<C-r>", "+"] }
+    ],
+    "editor.tabSize": 4,
+    "editor.insertSpaces": true,
+    "editor.wordWrap": "off",
+    "editor.cursorSurroundingLines": 8,
+    "editor.lineNumbers": "relative",
+
+    //github copilot
+    "github.copilot.nextEditSuggestions.enabled": true,
+    "github.copilot.enable": {
+        "plaintext": true,
+        "markdown": true,
+        "scminput": true
+    },
+
+    //better comments
+    "better-comments.tags": [
+        {
+            "tag": "TODO:",
+            "color": "#EA580C",
+            "strikethrough": false,
+            "backgroundColor": "transparent"
+        },
+        {
+            "tag": "FIXME:",
+            "color": "#FF2D00",
+            "strikethrough": false,
+            "backgroundColor": "transparent"
+        },
+        {
+            "tag": "BUG:",
+            "color": "#9333EA",
+            "strikethrough": false,
+            "backgroundColor": "transparent"
+        },
+        {
+            "tag": "HACK:",
+            "color": "#C026D3",
+            "strikethrough": false,
+            "backgroundColor": "transparent"
+        },
+        {
+            "tag": "NOTE:",
+            "color": "#2563EB",
+            "strikethrough": false,
+            "backgroundColor": "transparent"
+        },
+        {
+            "tag": "INFO:",
+            "color": "#0EA5E9",
+            "strikethrough": false,
+            "backgroundColor": "transparent"
+        },
+        {
+            "tag": "IDEA:",
+            "color": "#FFF",
+            "strikethrough": false,
+            "backgroundColor": "#EAB308"
+        }
+    ],
+}

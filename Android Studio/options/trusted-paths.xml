@@ -1,0 +1,23 @@
+<application>
+  <component name="Trusted.Paths">
+    <option name="TRUSTED_PROJECT_PATHS">
+      <map>
+        <entry key="D:\Applications\Bloom" value="true" />
+        <entry key="D:\Applications\ChatHub" value="true" />
+        <entry key="D:\Applications\DSAVisualiser" value="true" />
+        <entry key="D:\Applications\Example" value="true" />
+        <entry key="D:\Applications\GROOT" value="true" />
+        <entry key="D:\Applications\MyApplication" value="true" />
+        <entry key="D:\Applications\Notes" value="true" />
+        <entry key="D:\Applications\Test" value="true" />
+      </map>
+    </option>
+  </component>
+  <component name="Trusted.Paths.Settings">
+    <option name="TRUSTED_PATHS">
+      <list>
+        <option value="D:\Applications" />
+      </list>
+    </option>
+  </component>
+</application>

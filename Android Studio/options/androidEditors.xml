@@ -1,0 +1,11 @@
+<application>
+  <component name="AndroidEditors">
+    <option name="state">
+      <GlobalState>
+        <option name="preferredEditorMode" value="CODE" />
+        <option name="preferredPreviewLayoutMode" value="GRID" />
+        <option name="preferredResourcesEditorMode" value="SPLIT" />
+      </GlobalState>
+    </option>
+  </component>
+</application>

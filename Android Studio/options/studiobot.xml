@@ -1,0 +1,1191 @@
+<application>
+  <component name="StudioBotSettings">
+    <option name="acceptedTermsVersion" value="3" />
+    <option name="contextSharingModeV2" value="AskPerProject" />
+    <option name="onboardedVersion" value="3" />
+    <option name="queryHistory">
+      <list>
+        <historyEntry timestamp="1738325771261">package com.example.chathub.screens.login
+
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.credentials.CredentialManager
+import androidx.credentials.GetCredentialRequest
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.chathub.R
+import com.example.chathub.common.*
+import com.example.chathub.ext.basicButton
+import com.example.chathub.ext.fieldModifier
+import com.example.chathub.navigation.Routes
+import com.example.chathub.navigation.SignUp
+import com.example.chathub.snackbar.SnackbarManager
+import com.example.chathub.ui.theme.ChatHubTheme
+import com.google.android.libraries.identity.googleid.GetSignInWithGoogleOption
+import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
+import kotlinx.coroutines.launch
+
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun LoginScreen(
+    openScreen: (Routes) -&gt; Unit,
+    openAndPopUp: (Routes, Routes) -&gt; Unit,
+    viewModel: LoginViewModel = hiltViewModel()
+) {
+    val uiState by viewModel.uiState
+    val context = LocalContext.current
+    val credentialManager = CredentialManager.create(context)
+    val coroutineScope = rememberCoroutineScope()
+
+    val googleIdOption: GetSignInWithGoogleOption = GetSignInWithGoogleOption.Builder(context.getString(R.string.web_client_id)).build()
+
+    val request: GetCredentialRequest = GetCredentialRequest.Builder()
+        .addCredentialOption(googleIdOption)
+        .build()
+
+    fun signInWithGoogle() {
+        coroutineScope.launch {
+            try {
+                val result = credentialManager.getCredential(request = request, context = context)
+                val credential = result.credential
+                val googleIdCredential = GoogleIdTokenCredential.createFrom(credential.data)
+                viewModel.onGoogleLoginClick(googleIdCredential, openAndPopUp)
+            } catch (e: Exception) {
+                SnackbarManager.showMessage(R.string.google_sign_in_failed)
+            }
+        }
+    }
+
+    Scaffold(
+        topBar = {
+            BasicToolBar(title = R.string.login_title, canNavigateBack = false)
+        }
+    ) { innerPadding -&gt;
+        LoginScreenContent(
+            uiState = uiState,
+            onEmailChange = viewModel::onEmailChange,
+            onPasswordChange = viewModel::onPasswordChange,
+            onGoogleLoginClick = { signInWithGoogle() },
+            onLoginClick = { viewModel.onSignInClick(openAndPopUp) },
+            onNoAccountClick = { openScreen(SignUp) },
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(innerPadding)
+        )
+    }
+}
+
+@Composable
+fun LoginScreenContent(
+    uiState: LoginUiState,
+    onEmailChange: (String) -&gt; Unit,
+    onPasswordChange: (String) -&gt; Unit,
+    onLoginClick: () -&gt; Unit,
+    onGoogleLoginClick: () -&gt; Unit,
+    onNoAccountClick: () -&gt; Unit,
+    modifier: Modifier = Modifier
+) {
+
+    val enabled = !uiState.inProcess
+    val fieldModifier = Modifier.fieldModifier()
+    Box(modifier = modifier){
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState())
+                .alpha(if (uiState.inProcess) 0.5f else 1f)
+                .imePadding(),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+
+            OutlinedButton(
+                onClick = onGoogleLoginClick,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp, 20.dp),
+                enabled = enabled
+            ) {
+                Icon(
+                    painter = painterResource(id = R.drawable.google_login),
+                    contentDescription = stringResource(id = R.string.google_login),
+                    modifier = Modifier
+                        .wrapContentHeight()
+                        .size(ButtonDefaults.IconSize)
+                )
+                Spacer(modifier = Modifier.size(ButtonDefaults.IconSpacing))
+                Text(text = stringResource(id = R.string.google_login))
+            }
+
+            Divider(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp, vertical = 16.dp)
+            )
+
+            EmailField(
+                value = uiState.email,
+                onNewValue = onEmailChange,
+                modifier = fieldModifier,
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Email,
+                    imeAction = ImeAction.Next
+                ),
+                enabled = enabled
+            )
+
+            PasswordField(
+                value = uiState.password,
+                onNewValue = onPasswordChange,
+                modifier = fieldModifier,
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Password,
+                    imeAction = ImeAction.Done
+                ),
+                enabled = enabled
+            )
+
+            BasicTextButton(
+                text = R.string.no_account,
+                action = onNoAccountClick,
+                modifier = Modifier.basicButton(),
+                enabled = enabled
+            )
+
+            BasicButton(
+                text = R.string.login,
+                action = onLoginClick,
+                modifier = Modifier.basicButton(),
+                enabled = enabled
+            )
+        }
+        if (uiState.inProcess) {
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(MaterialTheme.colorScheme.surface.copy(alpha = 0.5f))
+            ) {
+                CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+            }
+        }
+    }
+}
+
+@Composable
+fun Divider(modifier: Modifier = Modifier) {
+    Row(
+        modifier = modifier,
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.Center
+    ) {
+        Box(
+            modifier = Modifier
+                .weight(1f)
+                .height(1.dp)
+                .background(color = DividerDefaults.color)
+        )
+        Text(
+            text = &quot;OR&quot;,
+            modifier = Modifier
+                .padding(horizontal = 8.dp)
+                .align(Alignment.CenterVertically)
+        )
+        Box(
+            modifier = Modifier
+                .weight(1f)
+                .height(1.dp)
+                .background(color = DividerDefaults.color)
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun LoginScreenPreview() {
+    ChatHubTheme {
+        LoginScreenContent(
+            uiState = LoginUiState(),
+            onEmailChange = {},
+            onPasswordChange = {},
+            onLoginClick = {},
+            onGoogleLoginClick = {},
+            onNoAccountClick = {}
+        )
+    }
+}
+
+@Preview
+@Composable
+fun LoginScreenDarkPreview() {
+    ChatHubTheme(darkTheme = true) {
+        LoginScreenContent(
+            uiState = LoginUiState(),
+            onEmailChange = {},
+            onPasswordChange = {},
+            onLoginClick = {},
+            onGoogleLoginClick = {},
+            onNoAccountClick = {}
+        )
+    }
+}</historyEntry>
+        <historyEntry timestamp="1738325658510">package com.example.chathub.navigation
+
+import androidx.compose.runtime.Composable
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import com.example.chathub.ApplicationState
+import com.example.chathub.screens.change_password.ChangePasswordScreen
+import com.example.chathub.screens.chat.ChatScreen
+import com.example.chathub.screens.home.HomeScreen
+import com.example.chathub.screens.login.LoginScreen
+import com.example.chathub.screens.profile.ProfileScreen
+import com.example.chathub.screens.settings.SettingsScreen
+import com.example.chathub.screens.sign_up.SignUpScreen
+
+@Composable
+fun Navigation(
+    appState: ApplicationState,
+    viewModel: NavigationViewModel = hiltViewModel()
+) {
+    val startDestination = viewModel.checkUserStatus()
+    NavHost(
+        navController = appState.navController,
+        startDestination = startDestination
+    ) {
+        composable&lt;Login&gt; {
+            LoginScreen(
+                openScreen = { route -&gt; appState.navigate(route) },
+                openAndPopUp = { route,popUp -&gt; appState.navigateAndPopUp(route,popUp) }
+            )
+        }
+
+        composable&lt;SignUp&gt; {
+            SignUpScreen(
+                navigateUp = { appState.navController.navigateUp() },
+                openScreen = { route -&gt; appState.clearAndNavigate(route) }
+            )
+        }
+
+        composable&lt;Home&gt; {
+            HomeScreen(
+                openScreen = { route -&gt; appState.navigate(route) }
+            )
+        }
+
+        composable&lt;ChatRoute&gt; {
+            ChatScreen(
+                onNavigateBack = { appState.navController.navigateUp() }
+            )
+        }
+
+        composable&lt;Settings&gt; {
+            SettingsScreen(
+                openAndClear = { route -&gt; appState.clearAndNavigate(route) },
+                openScreen = { route -&gt; appState.navigate(route) },
+                navigateUp = { appState.navController.navigateUp() }
+            )
+        }
+
+        composable&lt;Profile&gt; {
+            ProfileScreen(
+                navigateUp = { appState.popUp() }
+            )
+        }
+
+        composable&lt;ChangePassword&gt; {
+            ChangePasswordScreen(
+                navigateUp = { appState.popUp() }
+            )
+        }
+    }
+}</historyEntry>
+        <historyEntry timestamp="1738325497037">package com.example.chathub.navigation
+
+import kotlinx.serialization.Serializable
+
+sealed interface Routes
+
+@Serializable
+data object Login : Routes
+
+@Serializable
+data object SignUp : Routes
+
+@Serializable
+data object Profile : Routes
+
+@Serializable
+data object ChatList : Routes
+
+@Serializable
+data class ChatRoute(
+    val id: String?
+) : Routes
+
+@Serializable
+data object Settings : Routes
+
+@Serializable
+data object ChangePassword : Routes</historyEntry>
+        <historyEntry timestamp="1738295033168">I'm getting the following error while building my project. The error is: Cannot locate tasks that match ':app:testClasses' as task 'testClasses' not found in project ':app'.
+```
+Cannot locate tasks that match ':app:testClasses' as task 'testClasses' not found in project ':app'.
+
+* Try:
+&gt; Run gradle tasks to get a list of available tasks.
+&gt; For more on name expansion, please refer to https://docs.gradle.org/8.10.2/userguide/command_line_interface.html#sec:name_abbreviation in the Gradle documentation.
+&gt; Run with --stacktrace option to get the stack trace.
+&gt; Run with --info or --debug option to get more log output.
+&gt; Run with --scan to get full insights.
+&gt; Get more help at https://help.gradle.org.
+BUILD FAILED in 1m 31s
+```
+How do I fix this?</historyEntry>
+        <historyEntry timestamp="1737004825704">I'm getting the following error while syncing my project. The error is: Removing unused resources requires unused code shrinking to be turned on. See http://d.android.com/r/tools/shrink-resources.html for more information.
+```
+```
+How do I fix this?</historyEntry>
+        <historyEntry timestamp="1736830720394">Explain: FATAL EXCEPTION: main
+Process: com.example.bloom, PID: 351
+kotlinx.coroutines.CompletionHandlerException: Exception in completion handler InvokeOnCompletion@5457c91[job@3b067f6] for StandaloneCoroutine{Completed}@3b067f6
+at kotlinx.coroutines.JobSupport.notifyCompletion(JobSupport.kt:1502)
+at kotlinx.coroutines.JobSupport.completeStateFinalization(JobSupport.kt:325) with tag AndroidRuntime</historyEntry>
+        <historyEntry timestamp="1736657250209">package com.example.bloom
+
+import kotlinx.serialization.Serializable
+
+sealed interface Routes
+
+@Serializable
+data object Auth : Routes
+
+@Serializable
+data object Intro : Routes
+
+@Serializable
+data object Login : Routes
+
+@Serializable
+data object Registration : Routes
+
+
+@Serializable
+data object Home : Routes
+
+@Serializable
+data object Explore : Routes
+
+@Serializable
+data object Profile : Routes
+
+@Serializable
+data object Connection : Routes
+
+@Serializable
+data class Chat(
+    val connectionId: Int,
+    val name: String
+) : Routes
+
+@Serializable
+data object LikedYou : Routes</historyEntry>
+        <historyEntry timestamp="1736656996631">package com.example.bloom.screens.home
+
+import android.annotation.SuppressLint
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Circle
+import androidx.compose.material.icons.filled.FilterAlt
+import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.material3.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import com.example.bloom.ui.theme.BloomTheme
+
+@SuppressLint(&quot;UnusedMaterial3ScaffoldPaddingParameter&quot;)
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun ConnectionsScreen(
+    onConnectionClick: (Int, String) -&gt; Unit
+) {
+    var selectedTab by rememberSaveable { mutableIntStateOf(0) }
+    val tabTitles = listOf(&quot;Connections&quot;, &quot;Pending&quot;)
+
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = {
+                    Text(
+                        text = &quot;MESSAGES&quot;,
+                        style = MaterialTheme.typography.titleLarge,
+                        fontWeight = FontWeight.Bold,
+                        fontStyle = FontStyle.Italic
+                    )
+                },
+                actions = {
+                    Card(modifier = Modifier.clip(RoundedCornerShape(100))) {
+                        Row(
+                            modifier = Modifier.padding(8.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Icon(
+                                Icons.Default.Circle,
+                                contentDescription = &quot;Active&quot;,
+                                tint = Color.Green,
+                                modifier = Modifier.size(8.dp)
+                            )
+                            Spacer(modifier = Modifier.width(4.dp))
+                            Text(
+                                text = &quot;Active&quot;,
+                                style = MaterialTheme.typography.labelLarge,
+                                color = MaterialTheme.colorScheme.onBackground
+                            )
+                        }
+                    }
+                    Spacer(modifier = Modifier.width(16.dp))
+
+                    Icon(Icons.Default.FilterAlt, contentDescription = &quot;Filter&quot;)
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Icon(Icons.Default.MoreVert, contentDescription = &quot;More&quot;)
+                }
+            )
+        },
+        modifier = Modifier.fillMaxSize(),
+    ) {
+        Column(
+            modifier = Modifier.padding(top = it.calculateTopPadding())
+        ) {
+            ScrollableTabRow(
+                selectedTabIndex = selectedTab,
+                edgePadding = 0.dp,
+                indicator = {},
+                divider = {},
+                containerColor = Color.Transparent,
+                modifier = Modifier
+                    .padding(horizontal = 8.dp, vertical = 16.dp)
+                    .wrapContentSize()
+            ) {
+                tabTitles.forEachIndexed { index, title -&gt;
+                    Card(
+                        modifier = Modifier
+                            .padding(end = 8.dp)
+                            .wrapContentSize()
+                            .clip(CircleShape)
+                            .clickable(onClick = {
+                                selectedTab = index
+                            }),
+                        colors = CardDefaults.cardColors(
+                            containerColor = if (selectedTab == index) MaterialTheme.colorScheme.onBackground else MaterialTheme.colorScheme.surfaceContainer,
+                            contentColor = if (selectedTab == index) MaterialTheme.colorScheme.background else MaterialTheme.colorScheme.onSurface
+                        ),
+                        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp)
+                    ) {
+                        Text(
+                            text = title,
+                            style = MaterialTheme.typography.bodySmall.copy(
+                                fontWeight = if (selectedTab == index) FontWeight.Bold else FontWeight.Normal
+                            ),
+                            modifier = Modifier.padding(8.dp)
+                        )
+                    }
+                }
+            }
+            when (selectedTab) {
+                0 -&gt; ConnectionListScreen(
+                    onConnectionClick = onConnectionClick
+                )
+
+                1 -&gt; PendingListScreen()
+            }
+        }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun ConnectionsPreview() {
+    BloomTheme {
+        ConnectionsScreen(
+            onConnectionClick = { _, _ -&gt; },
+        )
+    }
+}</historyEntry>
+        <historyEntry timestamp="1736656768477">package com.example.bloom.screens.home
+
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.Chat
+import androidx.compose.material.icons.filled.Bolt
+import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material.icons.filled.Star
+import androidx.compose.material.icons.outlined.Settings
+import androidx.compose.material3.*
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import com.example.bloom.R
+import com.example.bloom.ui.theme.BloomTheme
+import com.example.bloom.ui.theme.orange
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun ProfileScreen() {
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = {
+                    Text(
+                        text = &quot;PROFILE&quot;,
+                        style = MaterialTheme.typography.titleLarge,
+                        fontWeight = FontWeight.Bold,
+                        fontStyle = FontStyle.Italic
+                    )
+                },
+                actions = {
+                    Card(
+                        modifier = Modifier
+                            .clip(CircleShape)
+                            .background(MaterialTheme.colorScheme.surfaceContainer)
+                    ) {
+                        IconButton(
+                            onClick = { /*TODO*/ },
+                        ) {
+                            Icon(
+                                imageVector = Icons.Outlined.Settings,
+                                contentDescription = &quot;Settings&quot;,
+                                tint = MaterialTheme.colorScheme.onSurface
+                            )
+                        }
+                    }
+                }
+            )
+        },
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(top = it.calculateTopPadding()),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Box(contentAlignment = Alignment.Center, modifier = Modifier.padding(16.dp)) {
+                CircularProgressIndicator(
+                    progress = {
+                        return@CircularProgressIndicator 0.75f
+                    },
+                    strokeWidth = 8.dp,
+                    color = orange,
+                    modifier = Modifier
+                        .size(120.dp)
+                        .rotate(90f)
+                )
+                Image(
+                    painter = painterResource(id = R.drawable.google),
+                    contentDescription = &quot;Profile Picture&quot;,
+                    modifier = Modifier
+                        .size(80.dp)
+                        .clip(CircleShape)
+                )
+                Card(
+                    modifier = Modifier
+                        .align(Alignment.TopEnd)
+                        .clip(CircleShape)
+                        .background(MaterialTheme.colorScheme.surfaceContainer)
+                ) {
+                    IconButton(
+                        onClick = { /* Handle edit */ },
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Edit,
+                            contentDescription = &quot;Edit&quot;,
+                            tint = orange
+                        )
+                    }
+                }
+            }
+
+            Text(
+                text = &quot;CATHERINE, 25&quot;,
+                style = MaterialTheme.typography.bodyLarge,
+                fontWeight = FontWeight.Bold
+            )
+            Text(
+                text = &quot;Left: 1&quot;,
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurface,
+                modifier = Modifier.padding(top = 4.dp)
+            )
+
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 16.dp),
+                horizontalArrangement = Arrangement.SpaceAround
+            ) {
+                FeatureCard(icon = Icons.Default.Star, label = &quot;03&quot;, subLabel = &quot;SUPERLIKES&quot;)
+                FeatureCard(icon = Icons.AutoMirrored.Filled.Chat, label = &quot;04&quot;, subLabel = &quot;REACHOUTS&quot;)
+                FeatureCard(icon = Icons.Default.Bolt, label = &quot;12&quot;, subLabel = &quot;AI PROMPTS&quot;)
+            }
+
+            Spacer(modifier = Modifier.weight(1f))
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(Color(0xFFFFE0B2), shape = RoundedCornerShape(8.dp))
+                    .padding(16.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Text(
+                    text = &quot;Bloom Premium&quot;,
+                    style = MaterialTheme.typography.titleMedium,
+                    color = Color.Black,
+                    fontWeight = FontWeight.Bold
+                )
+                Text(
+                    text = &quot;Get the complete experience of Bloom and make more meaningful connections&quot;,
+                    style = MaterialTheme.typography.bodyMedium,
+                    textAlign = TextAlign.Center,
+                    color = Color.Black,
+                    modifier = Modifier.padding(vertical = 8.dp)
+                )
+                Button(
+                    onClick = { /* Handle premium subscription */ },
+                    colors = ButtonDefaults.buttonColors(containerColor = orange)
+                ) {
+                    Text(text = &quot;Get it for only 100\u20B9/month&quot;, color = Color.Black)
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun FeatureCard(icon: ImageVector, label: String, subLabel: String) {
+    Card(
+        modifier = Modifier
+            .size(width = 100.dp, height = 150.dp)
+            .padding(8.dp),
+
+    ) {
+        Column(
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier.fillMaxSize()
+        ) {
+            Box(
+                contentAlignment = Alignment.Center,
+                modifier = Modifier
+                    .size(48.dp)
+                    .background(MaterialTheme.colorScheme.surface, shape = CircleShape)
+                    .align(Alignment.CenterHorizontally)
+            ) {
+                Icon(imageVector = icon, contentDescription = null)
+            }
+            Text(
+                text = label,
+                style = MaterialTheme.typography.titleMedium,
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier.padding(top = 8.dp)
+            )
+            Text(
+                text = subLabel,
+                style = MaterialTheme.typography.bodySmall,
+                color = Color.Gray,
+                textAlign = TextAlign.Center
+            )
+        }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun ProfilePreview() {
+    BloomTheme {
+        ProfileScreen()
+    }
+}</historyEntry>
+        <historyEntry timestamp="1736656597940">package com.example.bloom.screens.home
+
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.Send
+import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.material.icons.outlined.Videocam
+import androidx.compose.material3.*
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import com.example.bloom.ui.theme.BloomTheme
+import com.example.bloom.ui.theme.orange
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun ChatScreen(
+    id: Int,
+    name: String,
+    navigateBack: () -&gt; Unit
+) {
+
+    val chats = listOf(
+        Chat(&quot;Hey, wanna go on a hike sometime?&quot;, true),
+        Chat(&quot;I love hiking but I have an injury. Cant hike for 2 more weeks&quot;, false),
+        Chat(&quot;Hi&quot;, true)
+    )
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = {
+                    AppBar(onNavigateBack = navigateBack, name = name)
+                }
+            )
+        }
+    ) {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(it)
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .imePadding()
+                    .background(MaterialTheme.colorScheme.surface)
+            ) {
+                LazyColumn(
+                    modifier = Modifier
+                        .weight(1f)
+                        .fillMaxWidth(),
+                    reverseLayout = true
+                ) {
+                    items(chats) {
+                        ChatMessageItem(it, it.isFromMe)
+                    }
+                }
+
+                ChatInput(
+                    onValueChange = {},
+                    onSend = {},
+                )
+            }
+        }
+    }
+}
+
+@Composable
+fun ChatInput(
+    onValueChange: (String) -&gt; Unit,
+    onSend: () -&gt; Unit
+) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(8.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        OutlinedTextField(
+            value = &quot;&quot;,
+            minLines = 1,
+            maxLines = 3,
+            onValueChange = onValueChange,
+            placeholder = { Text(text = &quot;Message&quot;) },
+            shape = RoundedCornerShape(50),
+            modifier = Modifier
+                .weight(1f)
+                .padding(8.dp)
+                .align(Alignment.CenterVertically),
+        )
+        IconButton(
+            onClick = onSend,
+            modifier = Modifier
+                .align(Alignment.CenterVertically)
+                .size(OutlinedTextFieldDefaults.MinHeight),
+            colors = IconButtonDefaults.filledIconButtonColors(
+                containerColor = MaterialTheme.colorScheme.surfaceContainer,
+                contentColor = MaterialTheme.colorScheme.onSurface
+            )
+        ) {
+            Icon(imageVector = Icons.AutoMirrored.Filled.Send, contentDescription = &quot;Send&quot;)
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun AppBar(
+    onNavigateBack: () -&gt; Unit,
+    name: String
+) {
+    TopAppBar(
+        title = {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier
+                    .fillMaxWidth()
+            ) {
+                ProfileImage(40.dp)
+                Spacer(modifier = Modifier.width(16.dp))
+                Column {
+                    Text(
+                        text = name,
+                        modifier = Modifier.padding(),
+                        style = MaterialTheme.typography.bodyLarge,
+                        color = MaterialTheme.colorScheme.onBackground
+                    )
+                    Text(
+                        &quot;Active Now&quot;,
+                        color = Color.Green,
+                        style = MaterialTheme.typography.bodySmall
+                    )
+                }
+            }
+        },
+        colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.background),
+        navigationIcon = {
+            IconButton(
+                onClick = onNavigateBack,
+                modifier = Modifier
+                    .clip(CircleShape)
+                    .clickable(onClick = onNavigateBack)
+            ) {
+                Icon(
+                    imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                    contentDescription = &quot;&quot;
+                )
+            }
+        },
+        actions = {
+            IconButton(
+                onClick = {},
+                colors = IconButtonDefaults.iconButtonColors(
+                    containerColor = MaterialTheme.colorScheme.surfaceContainer,
+                    contentColor = MaterialTheme.colorScheme.onSurface
+                )
+            ) {
+                Icon(Icons.Outlined.Videocam, contentDescription = &quot;Video Call&quot;)
+            }
+            Spacer(modifier = Modifier.width(8.dp))
+            IconButton(
+                onClick = {},
+                colors = IconButtonDefaults.iconButtonColors(
+                    containerColor = MaterialTheme.colorScheme.surfaceContainer,
+                    contentColor = MaterialTheme.colorScheme.onSurface
+                )
+            ) {
+                Icon(Icons.Default.MoreVert, contentDescription = &quot;More&quot;)
+            }
+        }
+    )
+}
+
+@Composable
+fun ChatMessageItem(chat: Chat, isFromMe: Boolean) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 8.dp, vertical = 4.dp),
+        horizontalAlignment = when (isFromMe) {
+            true -&gt; Alignment.End
+            false -&gt; Alignment.Start
+        },
+    ) {
+        Card(
+            modifier = Modifier
+                .widthIn(max = (0.7f * LocalConfiguration.current.screenWidthDp.dp.value).dp, min = 40.dp)
+                .align(if (isFromMe) Alignment.End else Alignment.Start),
+            shape = RoundedCornerShape(
+                topStart = 30f,
+                topEnd = 30f,
+                bottomStart = if (isFromMe) 30f else 0f,
+                bottomEnd = if (isFromMe) 0f else 30f
+            ),
+            colors = CardDefaults.cardColors(
+                containerColor = if (isFromMe) orange else MaterialTheme.colorScheme.surfaceContainer,
+                contentColor = if (isFromMe) Color.White else MaterialTheme.colorScheme.onSurface,
+            ),
+        ) {
+            Text(
+                modifier = Modifier
+                    .padding(8.dp),
+                text = chat.message,
+            )
+        }
+    }
+}
+
+//TODO remove this class
+data class Chat(
+    val message: String,
+    val isFromMe: Boolean,
+)
+
+@Preview
+@Composable
+fun ChatScreenPreview() {
+    BloomTheme {
+        ChatScreen(name = &quot;Charlie&quot;, id = 0, navigateBack = {})
+    }
+}</historyEntry>
+        <historyEntry timestamp="1736656125497">in this screen implement a better way to set selected property of NavBArItem</historyEntry>
+        <historyEntry timestamp="1736655987711">package com.example.bloom.screens.home
+
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ChatBubble
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Person2
+import androidx.compose.material3.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavGraph.Companion.findStartDestination
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.example.bloom.*
+import com.example.bloom.Chat
+import com.example.bloom.Connection
+import com.example.bloom.ui.theme.BloomTheme
+
+@Composable
+fun HomeScreen(
+    navControllerMain: NavHostController = rememberNavController(),
+    navControllerBottomBar: NavHostController = rememberNavController()
+) {
+    val topLevelRoutes = listOf(
+        NavBar(&quot;Explore&quot;, Explore, Icons.Default.Home),
+        NavBar(&quot;Liked You&quot;, LikedYou, Icons.Default.Favorite),
+        NavBar(&quot;Connections&quot;, Connection, Icons.Default.ChatBubble),
+        NavBar(&quot;Profile&quot;, Profile, Icons.Default.Person2)
+    )
+    var selectedRoute by rememberSaveable { mutableStateOf(&quot;Explore&quot;) }
+    Scaffold(
+        bottomBar = {
+            NavigationBar(
+                containerColor = MaterialTheme.colorScheme.background
+            ) {
+                topLevelRoutes.forEach { route -&gt;
+                    NavigationBarItem(
+                        icon = {
+                            Icon(
+                                imageVector = route.icon,
+                                contentDescription = route.name,
+                            )
+                        },
+                        selected = selectedRoute == route.name,
+                        onClick = {
+                            selectedRoute = route.name
+                            navControllerBottomBar.navigate(route.route) {
+                                popUpTo(navControllerBottomBar.graph.findStartDestination().id) {
+                                    saveState = true
+                                }
+                                launchSingleTop = true
+                                restoreState = true
+                            }
+                        },
+                        colors = NavigationBarItemDefaults.colors(
+                            indicatorColor = MaterialTheme.colorScheme.background,
+                            unselectedIconColor = MaterialTheme.colorScheme.inversePrimary,
+                            selectedIconColor = MaterialTheme.colorScheme.inverseSurface
+                        )
+                    )
+                }
+            }
+        }
+    ) {
+        NavHost(
+            navController = navControllerBottomBar,
+            startDestination = Explore,
+            modifier = Modifier.padding(bottom = it.calculateBottomPadding())
+        ) {
+            composable&lt;Explore&gt; {
+                ExploreScreen()
+            }
+            composable&lt;LikedYou&gt; {
+                LikedYouScreen()
+            }
+            composable&lt;Connection&gt; {
+                ConnectionsScreen(
+                    onConnectionClick = { id, name -&gt;
+                        navControllerMain.navigate(Chat(id, name)) {
+                            restoreState = true
+                        }
+                    }
+                )
+            }
+            composable&lt;Profile&gt; {
+                ProfileScreen()
+            }
+        }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun HomePreview() {
+    BloomTheme {
+        HomeScreen()
+    }
+}
+
+data class NavBar&lt;T : Any&gt;(
+    val name: String,
+    val route: T,
+    val icon: ImageVector
+)</historyEntry>
+        <historyEntry timestamp="1736655836288">@SuppressLint(&quot;UnusedMaterial3ScaffoldPaddingParameter&quot;)
+class MainActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        setContent {
+            BloomTheme {
+                val snackbarHostState = remember { SnackbarHostState() }
+                val scope = rememberCoroutineScope()
+                ObserveAsEvents(flow = SnackbarManager.events, snackbarHostState) { event -&gt;
+                    scope.launch {
+                        snackbarHostState.currentSnackbarData?.dismiss()
+                        val result = snackbarHostState.showSnackbar(
+                            message = event.message,
+                            actionLabel = event.action?.name,
+                            duration = SnackbarDuration.Short
+                        )
+
+                        if (result == SnackbarResult.ActionPerformed) event.action?.action?.invoke()
+                    }
+                }
+
+                Scaffold(
+                    snackbarHost = { SnackbarHost(snackbarHostState) },
+                    modifier = Modifier.fillMaxSize()
+                ) { _ -&gt;
+                    val navController = rememberNavController()
+                    NavHost(
+                        navController = navController,
+                        startDestination = Auth,
+                    ) {
+                        navigation&lt;Auth&gt;(startDestination = Intro) {
+                            composable&lt;Intro&gt; {
+                                IntroScreen(
+                                    navigateToLogin = {
+                                        navController.navigate(Login)
+                                    }
+                                )
+                            }
+
+                            composable&lt;Login&gt; {
+                                LoginScreen(
+                                    navigateToHome = {
+                                        navController.navigate(Home) {
+                                            launchSingleTop = true
+                                            popUpTo(0) { inclusive = true }
+                                        }
+                                    },
+                                    navigateToRegister = {
+                                        navController.navigate(Registration)
+                                    }
+                                )
+                            }
+
+                            composable&lt;Registration&gt; {
+                                RegistrationScreen(
+                                    navigateBack = {
+                                        navController.popBackStack()
+                                    },
+                                    navigateToHome = {
+                                        navController.navigate(Home) {
+                                            this.launchSingleTop = true
+                                            popUpTo(0) { inclusive = true }
+                                        }
+                                    }
+                                )
+                            }
+                        }
+                        composable&lt;Home&gt; {
+                            HomeScreen(
+                                navControllerMain = navController,
+                                navControllerBottomBar = rememberNavController()
+                            )
+                        }
+
+                        composable&lt;Chat&gt; {
+                            val args = it.toRoute&lt;Chat&gt;()
+                            ChatScreen(
+                                name = args.name,
+                                id = args.connectionId,
+                                navigateBack = { navController.popBackStack() }
+                            )
+                        }
+                    }
+                }
+            }
+        }
+    }
+}</historyEntry>
+      </list>
+    </option>
+  </component>
+</application>
