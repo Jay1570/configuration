@@ -1,38 +1,34 @@
 <application>
   <component name="DimensionService">
     <location key="WELCOME_SCREEN.0.0.1920.1080@144dpi" x="960" y="450" />
-    <size key="GridCell.Tab.0.left.0.0.1920.1080@144dpi" width="1823" height="599" />
-    <size key="GridCell.Tab.0.center.0.0.1920.1080@144dpi" width="1823" height="599" />
-    <size key="GridCell.Tab.0.right.0.0.1920.1080@144dpi" width="1823" height="599" />
-    <size key="GridCell.Tab.0.bottom.0.0.1920.1080@144dpi" width="1823" height="599" />
+    <size key="GridCell.Tab.0.left.0.0.1920.1080@144dpi" width="1823" height="476" />
+    <size key="GridCell.Tab.0.center.0.0.1920.1080@144dpi" width="1823" height="476" />
+    <size key="GridCell.Tab.0.right.0.0.1920.1080@144dpi" width="1823" height="476" />
+    <size key="GridCell.Tab.0.bottom.0.0.1920.1080@144dpi" width="1823" height="476" />
+    <size key="GridCell.Tab.1.left.0.0.1920.1080@144dpi" width="1823" height="476" />
+    <size key="GridCell.Tab.1.center.0.0.1920.1080@144dpi" width="1823" height="476" />
+    <size key="GridCell.Tab.1.right.0.0.1920.1080@144dpi" width="1823" height="476" />
+    <size key="GridCell.Tab.1.bottom.0.0.1920.1080@144dpi" width="1823" height="476" />
   </component>
   <component name="WindowManager">
-    <frame x="-12" y="-12" width="1935" height="1095" extendedState="6" />
+    <frame x="-11" y="-11" width="1943" height="1103" extendedState="6" />
   </component>
   <component name="WindowStateApplicationService">
-    <state x="284" y="136" key="#Updates" timestamp="1733976729011">
+    <state x="421" y="93" key="FileChooserDialogImpl" timestamp="1743091245171">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
-    <state x="284" y="136" key="#Updates/0.0.1280.720" timestamp="1733976729011" />
-    <state x="421" y="93" key="FileChooserDialogImpl" timestamp="1738927060523">
-      <screen x="0" y="0" width="1280" height="720" />
-    </state>
-    <state x="421" y="93" key="FileChooserDialogImpl/0.0.1280.720" timestamp="1738927060523" />
-    <state x="221" y="96" key="IDE.errors.dialog" timestamp="1733977723695">
-      <screen x="0" y="0" width="1280" height="720" />
-    </state>
-    <state x="221" y="96" key="IDE.errors.dialog/0.0.1280.720" timestamp="1733977723695" />
+    <state x="421" y="93" key="FileChooserDialogImpl/0.0.1280.720" timestamp="1743091245171" />
     <state width="440" height="142" key="ShowUsagesActions.dimensionServiceKey" timestamp="1737174403586">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
     <state width="440" height="142" key="ShowUsagesActions.dimensionServiceKey/0.0.1280.720" timestamp="1737174403586" />
-    <state x="640" y="362" width="1295" height="735" key="WELCOME_SCREEN" timestamp="1739175857794">
+    <state x="640" y="362" width="1295" height="735" key="WELCOME_SCREEN" timestamp="1743226935066">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
-    <state x="640" y="362" width="1295" height="735" key="WELCOME_SCREEN/0.0.1280.720" timestamp="1739175857794" />
-    <state x="-7" y="-7" width="1295" height="735" maximized="true" key="com.android.tools.idea.devicemanagerv2.DeviceManagerWelcomeScreenFrame" timestamp="1733978648447">
+    <state x="640" y="362" width="1295" height="735" key="WELCOME_SCREEN/0.0.1280.720" timestamp="1743226935066" />
+    <state x="-7" y="-7" width="1295" height="735" maximized="true" key="com.android.tools.idea.devicemanagerv2.DeviceManagerWelcomeScreenFrame" timestamp="1740548803507">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
-    <state x="-7" y="-7" width="1295" height="735" maximized="true" key="com.android.tools.idea.devicemanagerv2.DeviceManagerWelcomeScreenFrame/0.0.1280.720" timestamp="1733978648447" />
+    <state x="-7" y="-7" width="1295" height="735" maximized="true" key="com.android.tools.idea.devicemanagerv2.DeviceManagerWelcomeScreenFrame/0.0.1280.720" timestamp="1740548803507" />
   </component>
 </application>

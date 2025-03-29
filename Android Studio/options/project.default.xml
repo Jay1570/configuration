@@ -434,7 +434,7 @@
       </component>
       <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
-    &quot;settings.editor.selected.configurable&quot;: &quot;project.kotlinCompiler&quot;
+    &quot;settings.editor.selected.configurable&quot;: &quot;advanced.settings&quot;
   }
 }</component>
       <component name="TaskManager">
@@ -451,14 +451,18 @@
         <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
       </component>
       <component name="WindowStateProjectService">
+        <state x="312" y="156" key="#Updates" timestamp="1741928071924">
+          <screen x="0" y="0" width="1280" height="720" />
+        </state>
+        <state x="312" y="156" key="#Updates/0.0.1280.720" timestamp="1741928071924" />
         <state x="279" y="110" key="FileChooserDialogImpl" timestamp="1733978645178">
           <screen x="0" y="0" width="1280" height="720" />
         </state>
         <state x="279" y="110" key="FileChooserDialogImpl/0.0.1280.720" timestamp="1733978645178" />
-        <state x="0" y="0" width="1142" height="720" key="SettingsEditor" timestamp="1738466891841">
+        <state x="0" y="0" width="1142" height="720" key="SettingsEditor" timestamp="1741510985608">
           <screen x="0" y="0" width="1280" height="720" />
         </state>
-        <state x="0" y="0" width="1142" height="720" key="SettingsEditor/0.0.1280.720" timestamp="1738466891841" />
+        <state x="0" y="0" width="1142" height="720" key="SettingsEditor/0.0.1280.720" timestamp="1741510985608" />
       </component>
       <component name="masterDetails">
         <states>

@@ -5,6 +5,1020 @@
     <option name="onboardedVersion" value="3" />
     <option name="queryHistory">
       <list>
+        <historyEntry timestamp="1742022787291">Explain: Exception Sending message
+android.os.NetworkOnMainThreadException
+at android.os.StrictMode$AndroidBlockGuardPolicy.onNetwork(StrictMode.java:1675)
+at java.net.Inet6AddressImpl.lookupHostByName(Inet6AddressImpl.java:115)
+at java.net.Inet6AddressImpl.lookupAllHostAddr(Inet6AddressImpl.java:103) with tag FCM</historyEntry>
+        <historyEntry timestamp="1742022625317">import org.json.JSONObject
+import java.net.HttpURLConnection
+import java.net.URL
+
+fun sendMessageToFCM(deviceToken: String, messageTitle: String, messageBody: String, serverKey: String) {
+    val urlString = &quot;https://fcm.googleapis.com/fcm/send&quot;
+    val url = URL(urlString)
+    val connection = url.openConnection() as HttpURLConnection
+    connection.requestMethod = &quot;POST&quot;
+    connection.setRequestProperty(&quot;Content-Type&quot;, &quot;application/json&quot;)
+    connection.setRequestProperty(&quot;Authorization&quot;, &quot;Bearer $serverKey&quot;)
+    connection.doOutput = true
+
+    val message = JSONObject()
+    message.put(&quot;to&quot;, deviceToken)
+    val notification = JSONObject()
+    notification.put(&quot;title&quot;, messageTitle</historyEntry>
+        <historyEntry timestamp="1742022503296">how to generate server key</historyEntry>
+        <historyEntry timestamp="1742022439417">Explain: FCM Error
+com.android.volley.ClientError
+at com.android.volley.toolbox.NetworkUtility.shouldRetryException(NetworkUtility.java:193)
+at com.android.volley.toolbox.BasicNetwork.performRequest(BasicNetwork.java:145)
+at com.android.volley.NetworkDispatcher.processRequest(NetworkDispatcher.java:132) with tag ChatViewModel</historyEntry>
+        <historyEntry timestamp="1740643473666">class InformationViewModel : ViewModel() {
+
+    private val _uiState = MutableStateFlow(InformationUiState())
+    val uiState get() = _uiState.asStateFlow()
+
+    private val currentTab get() = _uiState.value.currentTab
+
+    fun goToNext() {
+        when (currentTab) {
+            0 -&gt; incrementTab()
+            1 -&gt; if (_uiState.value.selectedPronouns.isNotEmpty()) incrementTab() else showSnackbar(&quot;Please select at least one pronoun&quot;)
+            2 -&gt; if (_uiState.value.selectedGender.isNotEmpty()) incrementTab() else showSnackbar(&quot;Please select a gender&quot;)
+            3 -&gt; if (_uiState.value.selectedSexuality.isNotEmpty()) incrementTab() else showSnackbar(&quot;Please select a sexuality&quot;)
+            4 -&gt; if (_uiState.value.selectedDatingPreferences.isNotEmpty()) incrementTab() else showSnackbar(&quot;Please select at least one dating preference&quot;)
+            5 -&gt; if (_uiState.value.selectedDatingIntention.isNotEmpty()) incrementTab() else showSnackbar(&quot;Please select a dating intention&quot;)
+            6 -&gt; if (_uiState.value.selectedRelationshipType.isNotEmpty()) incrementTab() else showSnackbar(&quot;Please select at least one relationship type&quot;)
+            7 -&gt; if (_uiState.value.selectedHeightInCm &gt; 0) incrementTab() else showSnackbar(&quot;Please select a height&quot;)
+            8 -&gt; if (_uiState.value.selectedEthnicity.isNotEmpty()) incrementTab() else showSnackbar(&quot;Please select at least one ethnicity&quot;)
+            9 -&gt; if (_uiState.value.doYouHaveChildren.isNotEmpty()) incrementTab() else showSnackbar(&quot;Please select a value&quot;)
+            10 -&gt; if (_uiState.value.selectedFamilyPlan.isNotEmpty()) incrementTab() else showSnackbar(&quot;Please select a family plan&quot;)
+            11 -&gt; if (_uiState.value.homeTown.isNotEmpty()) incrementTab() else showSnackbar(&quot;Please select a home town&quot;)
+            12 -&gt; if (_uiState.value.schoolOrCollege.isNotEmpty()) incrementTab() else showSnackbar(&quot;Please select a school or college&quot;)
+            13 -&gt; if (_uiState.value.workPlace.isNotEmpty()) incrementTab() else showSnackbar(&quot;Please select a work place&quot;)
+            14 -&gt; if (_uiState.value.selectedEducation.isNotEmpty()) incrementTab() else showSnackbar(&quot;Please select a education&quot;)
+            15 -&gt; if (_uiState.value.selectedReligiousBelief.isNotEmpty()) incrementTab() else showSnackbar(&quot;Please select a religious belief&quot;)
+            16 -&gt; if (_uiState.value.selectedPoliticalBelief.isNotEmpty()) incrementTab() else showSnackbar(&quot;Please select a political belief&quot;)
+            17 -&gt; if (_uiState.value.selectedDrinkOption.isNotEmpty()) incrementTab() else showSnackbar(&quot;Please select a drink option&quot;)
+            18 -&gt; if (_uiState.value.selectedTobaccoOption.isNotEmpty()) incrementTab() else showSnackbar(&quot;Please select a tobacco option&quot;)
+            19 -&gt; if (_uiState.value.selectedWeedOption.isNotEmpty()) incrementTab() else showSnackbar(&quot;Please select a weed option&quot;)
+            20 -&gt; if (_uiState.value.selectedDrugOption.isNotEmpty()) incrementTab() else showSnackbar(&quot;Please select a drug option&quot;)
+        }
+    }
+
+    private fun incrementTab() {
+        _uiState.update { it.copy(currentTab = currentTab + 1) }
+    }
+
+    fun goToPrevious() {
+        _uiState.update { it.copy(currentTab = currentTab - 1) }
+    }
+
+    fun addOrRemovePronoun(pronoun: String) {
+        _uiState.update {
+            val selectedPronouns = it.selectedPronouns.toMutableList()
+            if (selectedPronouns.contains(pronoun)) {
+                selectedPronouns.remove(pronoun)
+            } else if (selectedPronouns.size &lt; 4) {
+                selectedPronouns.add(pronoun)
+            }
+            it.copy(selectedPronouns = selectedPronouns)
+        }
+    }
+
+    fun changeSelectedGender(gender: String) {
+        _uiState.update { it.copy(selectedGender = gender) }
+    }
+
+    fun changeSelectedSexuality(sexuality: String) {
+        _uiState.update { it.copy(selectedSexuality = sexuality) }
+    }
+
+    fun addOrRemoveDatingPreference(preference: String) {
+        _uiState.update {
+            val selectedDatingPreferences = it.selectedDatingPreferences.toMutableList()
+            if (selectedDatingPreferences.contains(preference)) {
+                selectedDatingPreferences.remove(preference)
+            } else {
+                selectedDatingPreferences.add(preference)
+            }
+            it.copy(selectedDatingPreferences = selectedDatingPreferences)
+        }
+    }
+
+    fun changeDatingIntention(intention: String) {
+        _uiState.update { it.copy(selectedDatingIntention = intention) }
+    }
+
+    fun addOrRemoveRelationshipType(type: String) {
+        _uiState.update {
+            val selectedRelationshipType = it.selectedRelationshipType.toMutableList()
+            if (selectedRelationshipType.contains(type)) {
+                selectedRelationshipType.remove(type)
+            } else {
+                selectedRelationshipType.add(type)
+            }
+            it.copy(selectedRelationshipType = selectedRelationshipType)
+        }
+    }
+
+    fun changeSelectedHeightInCm(heightInCm: Int) {
+        _uiState.update { it.copy(selectedHeightInCm = heightInCm) }
+    }
+
+    fun addOrRemoveEthnicity(ethnicity: String) {
+        _uiState.update {
+            val selectedEthnicity = it.selectedEthnicity.toMutableList()
+            if (selectedEthnicity.contains(ethnicity)) {
+                selectedEthnicity.remove(ethnicity)
+            } else {
+                selectedEthnicity.add(ethnicity)
+            }
+            it.copy(selectedEthnicity = selectedEthnicity)
+        }
+    }
+
+    fun changeDoYouHaveChildren(value: String) {
+        _uiState.update { it.copy(doYouHaveChildren = value) }
+    }
+
+    fun changeFamilyPlan(plan: String) {
+        _uiState.update { it.copy(selectedFamilyPlan = plan) }
+    }
+
+    fun onHomeTownChange(homeTown: String) {
+        _uiState.update { it.copy(homeTown = homeTown) }
+    }
+
+    fun onSchoolOrCollegeChange(schoolOrCollege: String) {
+        _uiState.update { it.copy(schoolOrCollege = schoolOrCollege) }
+    }
+
+    fun onWorkPlaceChange(workPlace: String) {
+        _uiState.update { it.copy(workPlace = workPlace) }
+    }
+
+    fun changeSelectedEducation(education: String) {
+        _uiState.update { it.copy(selectedEducation = education) }
+    }
+
+    fun changeSelectedReligiousBelief(religiousBelief: String) {
+        _uiState.update { it.copy(selectedReligiousBelief = religiousBelief) }
+    }
+
+    fun changeSelectedPoliticalBelief(politicalBelief: String) {
+        _uiState.update { it.copy(selectedPoliticalBelief = politicalBelief) }
+    }
+
+    fun changeSelectedDrinkOption(drinkOption: String) {
+        _uiState.update { it.copy(selectedDrinkOption = drinkOption) }
+    }
+
+    fun changeSelectedTobaccoOption(tobaccoOption: String) {
+        _uiState.update { it.copy(selectedTobaccoOption = tobaccoOption) }
+    }
+
+    fun changeSelectedWeedOption(weedOption: String) {
+        _uiState.update { it.copy(selectedWeedOption = weedOption) }
+    }
+
+    fun changeSelectedDrugOption(drugOption: String) {
+        _uiState.update { it.copy(selectedDrugOption = drugOption) }
+    }
+
+    private fun showSnackbar(message: String) {
+        viewModelScope.launch {
+            SnackbarManager.sendEvent(SnackbarEvent(message))
+        }
+    }
+}
+
+data class InformationUiState(
+    val currentTab: Int = 0,
+    val selectedPronouns: List&lt;String&gt; = emptyList(),
+    val selectedGender: String = &quot;&quot;,
+    val selectedSexuality: String = &quot;&quot;,
+    val selectedDatingPreferences: List&lt;String&gt; = emptyList(),
+    val selectedDatingIntention: String = &quot;&quot;,
+    val selectedRelationshipType: List&lt;String&gt; = emptyList(),
+    val selectedHeightInCm: Int = 0,
+    val selectedEthnicity: List&lt;String&gt; = emptyList(),
+    val doYouHaveChildren: String = &quot;&quot;,
+    val selectedFamilyPlan: String = &quot;&quot;,
+    val homeTown: String = &quot;&quot;,
+    val schoolOrCollege: String = &quot;&quot;,
+    val workPlace: String = &quot;&quot;,
+    val selectedEducation: String = &quot;&quot;,
+    val selectedReligiousBelief: String = &quot;&quot;,
+    val selectedPoliticalBelief: String = &quot;&quot;,
+    val selectedDrinkOption: String = &quot;&quot;,
+    val selectedTobaccoOption: String = &quot;&quot;,
+    val selectedWeedOption: String = &quot;&quot;,
+    val selectedDrugOption: String = &quot;&quot;
+)</historyEntry>
+        <historyEntry timestamp="1740642358318">I'm getting the following error while building my project. The error is: Conflicting overloads:
+fun WeedSelectionScreenPreview(): Unit
+```
+$ ./gradlew :app:compileDebugKotlin
+e: file:///D:/Applications/Bloom/app/src/main/java/com/example/bloom/screens/information/WeedSelectionScreen.kt:81:1 Conflicting overloads:
+fun WeedSelectionScreenPreview(): Unit
+
+```
+How do I fix this?</historyEntry>
+        <historyEntry timestamp="1740544083028">fix this layout
+Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+    ) {
+        Text(
+            text = &quot;What's your sexuality?&quot;,
+            fontSize = 30.sp,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier.padding(bottom = 16.dp)
+        )
+
+        LazyColumn(modifier = Modifier.padding(bottom = 20.dp)) {
+            items(options) { option -&gt;
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clickable { selectedOption = option }
+                        .padding(vertical = 12.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        text = option,
+                        fontSize = 18.sp,
+                        modifier = Modifier.weight(.1f)
+                    )
+                    RadioButton(
+                        selected = selectedOption == option,
+                        onClick = { selectedOption = option }
+                    )
+                }
+                HorizontalDivider(thickness = 1.dp, color = MaterialTheme.colorScheme.outlineVariant)
+            }
+        }
+    }
+    Column(
+        verticalArrangement = Arrangement.Bottom,
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+    ) {
+        Card(
+            modifier = Modifier.clickable(
+                onClick = {
+                    isVisibleOnProfile = !isVisibleOnProfile
+                }
+            )
+        ) {
+            Row(
+                modifier = Modifier.wrapContentWidth(),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Checkbox(
+                    checked = isVisibleOnProfile,
+                    onCheckedChange = { isVisibleOnProfile = it }
+                )
+                Text(
+                    text = &quot;Visible on profile&quot;,
+                    style = MaterialTheme.typography.titleLarge,
+                    modifier = Modifier.padding(horizontal = 8.dp)
+                )
+            }
+        }
+    }</historyEntry>
+        <historyEntry timestamp="1740288766931">object NotificationHelper {
+
+    private const val CHANNEL_ID = &quot;screen_recording_channel&quot;
+
+    fun createNotification(context: Context): Notification {
+        val intent = Intent(context, MainActivity::class.java)
+        val pendingIntent =
+            PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_IMMUTABLE)
+
+        return Notification.Builder(context, CHANNEL_ID)
+            .setContentTitle(&quot;Screen Recording&quot;)
+            .setContentText(&quot;Recording in progress...&quot;)
+            .setSmallIcon(R.drawable.ic_launcher_foreground)
+            .setContentIntent(pendingIntent)
+            .build()
+    }
+
+    fun createNotificationChannel(context: Context) {
+        val serviceChannel = NotificationChannel(
+            CHANNEL_ID,
+            &quot;Screen Recording Channel&quot;,
+            NotificationManager.IMPORTANCE_DEFAULT
+        )
+        val notificationManager = context.getSystemService&lt;NotificationManager&gt;()
+        notificationManager?.createNotificationChannel(serviceChannel)
+    }
+}</historyEntry>
+        <historyEntry timestamp="1740288703274">this is working but i don't see notification bubble on status bar on my samsung device(android 14)
+class ScreenRecordService : Service() {
+
+    private var mediaProjection: MediaProjection? = null
+
+    private var virtualDisplay: VirtualDisplay? = null
+
+    private val mediaRecorder by lazy {
+        if (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.S) {
+            MediaRecorder(applicationContext)
+        } else {
+            MediaRecorder()
+        }
+    }
+    private val serviceScope = CoroutineScope(Dispatchers.IO + SupervisorJob())
+
+    private val outputFile by lazy {
+        File(cacheDir, &quot;tmp.mp4&quot;)
+    }
+
+    private val mediaProjectionManager by lazy {
+        getSystemService&lt;MediaProjectionManager&gt;()
+    }
+
+    private val mediaProjectionCallback = object : MediaProjection.Callback() {
+        override fun onStop() {
+            super.onStop()
+            releaseResources()
+            stopService()
+            saveToGallery()
+        }
+    }
+
+    private fun saveToGallery() {
+        serviceScope.launch {
+            val contentValues = ContentValues().apply {
+                put(MediaStore.Video.Media.DISPLAY_NAME, &quot;video_${System.currentTimeMillis()}.mp4&quot;)
+                put(MediaStore.Video.Media.RELATIVE_PATH, &quot;Movies/Recordings&quot;)
+            }
+            val videoCollection = if (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.Q) {
+                MediaStore.Video.Media.getContentUri(MediaStore.VOLUME_EXTERNAL_PRIMARY)
+            } else {
+                MediaStore.Video.Media.EXTERNAL_CONTENT_URI
+            }
+
+            contentResolver.insert(videoCollection, contentValues)?.let { uri -&gt;
+                contentResolver.openOutputStream(uri)?.use { outputStream -&gt;
+                    FileInputStream(outputFile).use { inputStream -&gt;
+                        inputStream.copyTo(outputStream)
+                    }
+                }
+            }
+        }
+    }
+
+    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        when (intent?.action) {
+            START_RECORDING -&gt; {
+                val notification = NotificationHelper.createNotification(applicationContext)
+                NotificationHelper.createNotificationChannel(applicationContext)
+                if (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.Q) {
+                    startForeground(
+                        1,
+                        notification,
+                        ServiceInfo.FOREGROUND_SERVICE_TYPE_MEDIA_PROJECTION
+                    )
+                } else {
+                    startForeground(
+                        1,
+                        notification
+                    )
+                }
+                _isServiceRunning.value = true
+                startRecording(intent)
+            }
+
+            STOP_RECORDING -&gt; {
+                stopRecording()
+            }
+        }
+        return START_STICKY
+    }
+
+    private fun startRecording(intent: Intent) {
+        val config = if (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.TIRAMISU) {
+            intent.getParcelableExtra(KEY_RECORDING_CONFIG, ScreenRecordConfig::class.java)
+        } else {
+            intent.getParcelableExtra(KEY_RECORDING_CONFIG)
+        }
+
+        if (config == null) {
+            return
+        }
+
+        mediaProjection = mediaProjectionManager?.getMediaProjection(config.resultCode, config.data)
+        mediaProjection?.registerCallback(mediaProjectionCallback, null)
+
+        initializeRecorder()
+        mediaRecorder.start()
+        virtualDisplay = createVirtualDisplay()
+    }
+
+    private fun stopRecording() {
+        mediaRecorder.stop()
+        mediaProjection?.stop()
+        mediaRecorder.reset()
+    }
+
+    private fun stopService() {
+        _isServiceRunning.value = false
+        stopForeground(STOP_FOREGROUND_REMOVE)
+        stopSelf()
+    }
+
+    private fun getWindowSize(): Pair&lt;Int, Int&gt; {
+        val calculator = WindowMetricsCalculator.getOrCreate()
+        val metrics = calculator.computeMaximumWindowMetrics(applicationContext)
+        return metrics.bounds.width() to metrics.bounds.height()
+    }
+
+    private fun getScaledDimensions(maxWidth: Int, maxHeight: Int, scaleFactor: Float = 0.8f): Pair&lt;Int, Int&gt; {
+        val aspectRatio = maxWidth / maxHeight.toFloat()
+
+        var newWidth = (maxWidth * scaleFactor).toInt()
+        var newHeight = (newWidth / aspectRatio).toInt()
+
+        if (newHeight &gt; maxHeight * scaleFactor) {
+            newHeight = (maxHeight * scaleFactor).toInt()
+            newWidth = (newHeight * aspectRatio).toInt()
+        }
+        return newWidth to newHeight
+    }
+
+    private fun initializeRecorder() {
+        val (width, height) = getWindowSize()
+        val (scaledWidth, scaledHeight) = getScaledDimensions(width, height)
+
+        with(mediaRecorder) {
+            setVideoSource(MediaRecorder.VideoSource.SURFACE)
+            setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP)
+            setOutputFile(outputFile)
+            setVideoSize(scaledWidth, scaledHeight)
+            setVideoEncoder(MediaRecorder.VideoEncoder.H264)
+            setVideoEncodingBitRate(VIDEO_BIT_RATE * 1000)
+            setVideoFrameRate(VIDEO_FRAME_RATE)
+            prepare()
+
+        }
+    }
+
+    private fun createVirtualDisplay(): VirtualDisplay? {
+        val (width, height) = getWindowSize()
+        return mediaProjection?.createVirtualDisplay(
+            &quot;Screen&quot;,
+            width,
+            height,
+            resources.displayMetrics.densityDpi,
+            DisplayManager.VIRTUAL_DISPLAY_FLAG_AUTO_MIRROR,
+            mediaRecorder.surface,
+            null,
+            null
+        )
+    }
+
+    override fun onBind(intent: Intent?): IBinder? {
+        return null
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _isServiceRunning.value = false
+        serviceScope.coroutineContext.cancelChildren()
+    }
+
+    private fun releaseResources() {
+        mediaRecorder.release()
+        virtualDisplay?.release()
+        mediaProjection?.unregisterCallback(mediaProjectionCallback)
+        mediaProjection = null
+    }
+
+    companion object {
+        private val _isServiceRunning = MutableStateFlow(false)
+        val isServiceRunning get() = _isServiceRunning.asStateFlow()
+
+        private const val VIDEO_FRAME_RATE = 30
+        private const val VIDEO_BIT_RATE = 512
+
+        const val START_RECORDING = &quot;START&quot;
+        const val STOP_RECORDING = &quot;STOP&quot;
+        const val KEY_RECORDING_CONFIG = &quot;KEY_RECORDING_CONFIG&quot;
+    }
+}
+
+@Parcelize
+data class ScreenRecordConfig(
+    val resultCode: Int,
+    val data: Intent
+) : Parcelable</historyEntry>
+        <historyEntry timestamp="1740288053304">class ScreenRecordService : Service() {
+
+    private var mediaProjection: MediaProjection? = null
+
+    private var virtualDisplay: VirtualDisplay? = null
+
+    private val mediaRecorder by lazy {
+        if (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.S) {
+            MediaRecorder(applicationContext)
+        } else {
+            MediaRecorder()
+        }
+    }
+    private val serviceScope = CoroutineScope(Dispatchers.IO + SupervisorJob())
+
+    private val outputFile by lazy {
+        File(cacheDir, &quot;tmp.mp4&quot;)
+    }
+
+    private val mediaProjectionManager by lazy {
+        getSystemService&lt;MediaProjectionManager&gt;()
+    }
+
+    private val mediaProjectionCallback = object : MediaProjection.Callback() {
+        override fun onStop() {
+            super.onStop()
+            releaseResources()
+            stopService()
+            saveToGallery()
+        }
+    }
+
+    private fun saveToGallery() {
+        serviceScope.launch {
+            val contentValues = ContentValues().apply {
+                put(MediaStore.Video.Media.DISPLAY_NAME, &quot;video_${System.currentTimeMillis()}.mp4&quot;)
+                put(MediaStore.Video.Media.RELATIVE_PATH, &quot;Movies/Recordings&quot;)
+            }
+            val videoCollection = if (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.Q) {
+                MediaStore.Video.Media.getContentUri(MediaStore.VOLUME_EXTERNAL_PRIMARY)
+            } else {
+                MediaStore.Video.Media.EXTERNAL_CONTENT_URI
+            }
+
+            contentResolver.insert(videoCollection, contentValues)?.let { uri -&gt;
+                contentResolver.openOutputStream(uri)?.use { outputStream -&gt;
+                    FileInputStream(outputFile).use { inputStream -&gt;
+                        inputStream.copyTo(outputStream)
+                    }
+                }
+            }
+        }
+    }
+
+    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        when (intent?.action) {
+            START_RECORDING -&gt; {
+                val notification = NotificationHelper.createNotification(applicationContext)
+                if (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.Q) {
+                    startForeground(
+                        1,
+                        notification,
+                        ServiceInfo.FOREGROUND_SERVICE_TYPE_MEDIA_PROJECTION
+                    )
+                } else {
+                    startForeground(
+                        1,
+                        notification
+                    )
+                }
+                _isServiceRunning.value = true
+                startRecording(intent)
+            }
+
+            STOP_RECORDING -&gt; {
+                stopRecording()
+            }
+        }
+        return START_STICKY
+    }
+
+    private fun startRecording(intent: Intent) {
+        val config = if (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.TIRAMISU) {
+            intent.getParcelableExtra(KEY_RECORDING_CONFIG, ScreenRecordConfig::class.java)
+        } else {
+            intent.getParcelableExtra(KEY_RECORDING_CONFIG)
+        }
+
+        if (config == null) {
+            return
+        }
+
+        mediaProjection = mediaProjectionManager?.getMediaProjection(config.resultCode, config.data)
+        mediaProjection?.registerCallback(mediaProjectionCallback, null)
+
+        initializeRecorder()
+        mediaRecorder.start()
+        virtualDisplay = createVirtualDisplay()
+    }
+
+    private fun stopRecording() {
+        mediaRecorder.stop()
+        mediaRecorder.reset()
+    }
+
+    private fun stopService() {
+        _isServiceRunning.value = false
+        stopForeground(STOP_FOREGROUND_REMOVE)
+        stopSelf()
+    }
+
+    private fun getWindowSize(): Pair&lt;Int, Int&gt; {
+        val calculator = WindowMetricsCalculator.getOrCreate()
+        val metrics = calculator.computeMaximumWindowMetrics(applicationContext)
+        return metrics.bounds.width() to metrics.bounds.height()
+    }
+
+    private fun getScaledDimensions(maxWidth: Int, maxHeight: Int, scaleFactor: Float = 0.8f): Pair&lt;Int, Int&gt; {
+        val aspectRatio = maxWidth / maxHeight.toFloat()
+
+        var newWidth = (maxWidth * scaleFactor).toInt()
+        var newHeight = (newWidth / aspectRatio).toInt()
+
+        if (newHeight &gt; maxHeight * scaleFactor) {
+            newHeight = (maxHeight * scaleFactor).toInt()
+            newWidth = (newHeight * aspectRatio).toInt()
+        }
+        return newWidth to newHeight
+    }
+
+    private fun initializeRecorder() {
+        val (width, height) = getWindowSize()
+        val (scaledWidth, scaledHeight) = getScaledDimensions(width, height)
+
+        with(mediaRecorder) {
+            setVideoSource(MediaRecorder.VideoSource.SURFACE)
+            setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP)
+            setOutputFile(outputFile)
+            setVideoSize(scaledWidth, scaledHeight)
+            setVideoEncoder(MediaRecorder.VideoEncoder.H264)
+            setVideoEncodingBitRate(VIDEO_BIT_RATE * 1000)
+            setVideoFrameRate(VIDEO_FRAME_RATE)
+            prepare()
+
+        }
+    }
+
+    private fun createVirtualDisplay(): VirtualDisplay? {
+        val (width, height) = getWindowSize()
+        return mediaProjection?.createVirtualDisplay(
+            &quot;Screen&quot;,
+            width,
+            height,
+            resources.displayMetrics.densityDpi,
+            DisplayManager.VIRTUAL_DISPLAY_FLAG_AUTO_MIRROR,
+            mediaRecorder.surface,
+            null,
+            null
+        )
+    }
+
+    override fun onBind(intent: Intent?): IBinder? {
+        return null
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _isServiceRunning.value = false
+        serviceScope.coroutineContext.cancelChildren()
+    }
+
+    private fun releaseResources() {
+        mediaRecorder.release()
+        virtualDisplay?.release()
+        mediaProjection?.unregisterCallback(mediaProjectionCallback)
+        mediaProjection?.stop()
+        mediaProjection = null
+    }
+
+    companion object {
+        private val _isServiceRunning = MutableStateFlow(false)
+        val isServiceRunning get() = _isServiceRunning.asStateFlow()
+
+        private const val VIDEO_FRAME_RATE = 30
+        private const val VIDEO_BIT_RATE = 512
+
+        const val START_RECORDING = &quot;START&quot;
+        const val STOP_RECORDING = &quot;STOP&quot;
+        const val KEY_RECORDING_CONFIG = &quot;KEY_RECORDING_CONFIG&quot;
+    }
+}
+
+@Parcelize
+data class ScreenRecordConfig(
+    val resultCode: Int,
+    val data: Intent
+) : Parcelable</historyEntry>
+        <historyEntry timestamp="1740287990402">Explain: FATAL EXCEPTION: main
+Process: com.example.screenrecording, PID: 24751
+java.lang.RuntimeException: Unable to start service com.example.screenrecording.ScreenRecordService@6d0726e with Intent { act=START cmp=com.example.screenrecording/.ScreenRecordService (has extras) }: java.lang.SecurityException: Cannot create VirtualDisplay with non-current MediaProjection
+at android.app.ActivityThread.handleServiceArgs(ActivityThread.java:5286)
+at android.app.ActivityThread.-$$Nest$mhandleServiceArgs(Unknown Source:0) with tag AndroidRuntime</historyEntry>
+        <historyEntry timestamp="1740120318392">@Composable
+fun ImageSelectionScreen(
+    images: List&lt;Uri&gt;,
+    onAddImage: (Int, Uri) -&gt; Unit,
+    onRemoveImage: (Int) -&gt; Unit
+) {
+
+    var clickedIndex by remember { mutableIntStateOf(-1) }
+    val context = LocalContext.current
+    val launcher =
+        rememberLauncherForActivityResult(ActivityResultContracts.GetContent()) { uri -&gt;
+            uri?.let {
+                if (clickedIndex != -1) {
+                    cropImage(
+                        context = context,
+                        sourceUri = uri,
+                        index = clickedIndex,
+                        onCropped = {
+                            onAddImage(clickedIndex, it)
+                            clickedIndex = -1
+                        })
+                }
+            }
+        }
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(vertical = 16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(
+            text = &quot;Pick your photos&quot;,
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier.padding(bottom = 8.dp)
+        )
+
+        LazyVerticalGrid(
+            columns = GridCells.Fixed(3),
+            modifier = Modifier.fillMaxWidth(),
+            contentPadding = PaddingValues(8.dp)
+        ) {
+            items(images.size) { index -&gt;
+                Box(
+                    modifier = Modifier
+                        .aspectRatio(1f)
+                        .padding(4.dp)
+                        .border(1.dp, Color.Gray, shape = RoundedCornerShape(8.dp))
+                        .clickable {
+                            if (images[index] == Uri.EMPTY) {
+                                clickedIndex = index
+                                launcher.launch(&quot;image/*&quot;)
+                            }
+                        },
+                    contentAlignment = Alignment.Center
+                ) {
+                    if (images[index] == Uri.EMPTY) {
+                        Icon(
+                            Icons.Default.Add,
+                            contentDescription = &quot;Add Image&quot;,
+                            tint = MaterialTheme.colorScheme.outline
+                        )
+                    } else {
+                        AsyncImage(
+                            model = ImageRequest.Builder(context).data(images[index])
+                                .build(),
+                            contentDescription = &quot;Selected Image&quot;,
+                            contentScale = ContentScale.Fit,
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .clip(RoundedCornerShape(8.dp))
+                                .clickable {
+                                    onRemoveImage(index)
+                                }
+                        )
+                    }
+                }
+            }
+        }
+
+        Text(
+            text = &quot;Click on the Image to Remove it\n6 required&quot;,
+            fontSize = 14.sp,
+            color = Color.Gray,
+            textAlign = TextAlign.Center,
+            modifier = Modifier.padding(top = 8.dp)
+        )
+    }
+}
+
+fun cropImage(context: Context, sourceUri: Uri, index: Int, onCropped: (Uri) -&gt; Unit) {
+    val croppedUri = getTempCroppedImageUri(context, sourceUri, index)
+    val cropIntent = Intent(&quot;com.android.camera.action.CROP&quot;).apply {
+        setDataAndType(croppedUri, &quot;image/*&quot;)
+        putExtra(&quot;crop&quot;, &quot;true&quot;)
+        putExtra(&quot;aspectX&quot;, 1)
+        putExtra(&quot;aspectY&quot;, 1)
+        putExtra(&quot;outputX&quot;, 512)
+        putExtra(&quot;outputY&quot;, 512)
+        putExtra(&quot;return-data&quot;, false)
+        putExtra(MediaStore.EXTRA_OUTPUT, croppedUri)
+        putExtra(&quot;outputFormat&quot;, Bitmap.CompressFormat.JPEG.toString())
+        addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+        addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
+    }
+
+    val launcher = (context as ComponentActivity).activityResultRegistry.register(
+        &quot;cropImage&quot;,
+        ActivityResultContracts.StartActivityForResult()
+    ) { result -&gt;
+        if (result.resultCode == Activity.RESULT_OK) {
+            onCropped(croppedUri)
+        }
+    }
+
+    launcher.launch(cropIntent)
+}
+
+private fun getTempCroppedImageUri(context: Context, uri: Uri, index: Int): Uri {
+    val inputStream = context.contentResolver.openInputStream(uri)
+    val file = File(context.filesDir, &quot;temp_image_$index.jpg&quot;)
+
+    if (file.exists()) file.delete()
+    val outputStream = FileOutputStream(file)
+
+    inputStream?.use { input -&gt;
+        outputStream.use { output -&gt;
+            input.copyTo(output)
+        }
+    }
+
+    return FileProvider.getUriForFile(context, &quot;${context.packageName}.provider&quot;, file)
+}
+
+@Preview(showBackground = true)
+@Composable
+fun PreviewImagePickerScreen() {
+    ImageSelectionScreen(
+        images = List(6) { Uri.EMPTY },
+        onAddImage = { _, _ -&gt; },
+        onRemoveImage = {}
+    )
+}
+if i remove image and then add another image it displays the old image means it is not overwriting</historyEntry>
+        <historyEntry timestamp="1740110007306">Explain: FATAL EXCEPTION: main
+Process: com.example.bloom, PID: 7092
+java.lang.RuntimeException: Failure delivering result ResultInfo{who=null, request=605038376, result=-1, data=Intent { dat=content://media/... flg=0x41 clip={image/* video/* {U(content)}} }} to activity {com.example.bloom/com.example.bloom.MainActivity}: java.lang.SecurityException: UID 10269 does not have permission to content://media/picker_get_content/0/com.android.providers.media.photopicker/media/1000021503 [user 0]
+at android.app.ActivityThread.deliverResults(ActivityThread.java:6063)
+at android.app.ActivityThread.handleSendResult(ActivityThread.java:6102) with tag AndroidRuntime</historyEntry>
+        <historyEntry timestamp="1740109330310">what is the other way?</historyEntry>
+        <historyEntry timestamp="1740109211696">private fun getTempCroppedImageUri(context: Context): Uri {
+    val tempFile = File(context.cacheDir, &quot;cropped_image.jpg&quot;)
+    return FileProvider.getUriForFile(context, &quot;${context.packageName}.provider&quot;, tempFile)
+}
+well this is my code that got above error</historyEntry>
+        <historyEntry timestamp="1740109118255">Explain: FATAL EXCEPTION: main
+Process: com.example.bloom, PID: 731
+java.lang.RuntimeException: Failure delivering result ResultInfo{who=null, request=134148444, result=-1, data=Intent { dat=content://media/... flg=0x41 clip={image/* video/* {U(content)}} }} to activity {com.example.bloom/com.example.bloom.MainActivity}: java.lang.IllegalArgumentException: Couldn't find meta-data for provider with authority com.example.bloom.provider
+at android.app.ActivityThread.deliverResults(ActivityThread.java:6063)
+at android.app.ActivityThread.handleSendResult(ActivityThread.java:6102) with tag AndroidRuntime</historyEntry>
+        <historyEntry timestamp="1740024929399">give me proguard rules so that it doesn't affect my code but shrinks resources</historyEntry>
+        <historyEntry timestamp="1740024896436">I'm getting the following error while building my project. The error is: Missing class com.caverock.androidsvg.SVG (referenced from: android.graphics.drawable.Drawable io.noties.markwon.image.svg.SvgMediaDecoder.decode(java.lang.String, java.io.InputStream) and 1 other context)
+```
+$ ./gradlew :app:minifyReleaseWithR8
+Missing class com.caverock.androidsvg.SVG (referenced from: android.graphics.drawable.Drawable io.noties.markwon.image.svg.SvgMediaDecoder.decode(java.lang.String, java.io.InputStream) and 1 other context)
+Missing class com.caverock.androidsvg.SVGParseException (referenced from: android.graphics.drawable.Drawable io.noties.markwon.image.svg.SvgMediaDecoder.decode(java.lang.String, java.io.InputStream) and 1 other context)
+Missing class com.squareup.okhttp.CipherSuite (referenced from: io.grpc.okhttp.internal.ConnectionSpec io.grpc.okhttp.Utils.convertSpec(com.squareup.okhttp.ConnectionSpec))
+Missing class com.squareup.okhttp.ConnectionSpec (referenced from: io.grpc.okhttp.OkHttpChannelBuilder io.grpc.okhttp.OkHttpChannelBuilder.connectionSpec(com.squareup.okhttp.ConnectionSpec) and 2 other contexts)
+Missing class com.squareup.okhttp.TlsVersion (referenced from: io.grpc.okhttp.internal.ConnectionSpec io.grpc.okhttp.Utils.convertSpec(com.squareup.okhttp.ConnectionSpec))
+Missing class java.lang.reflect.AnnotatedType (referenced from: java.lang.reflect.AnnotatedType[] com.google.common.reflect.Invokable$ConstructorInvokable.getAnnotatedParameterTypes() and 6 other contexts)
+Missing class pl.droidsonroids.gif.GifDrawable (referenced from: android.graphics.drawable.Drawable io.noties.markwon.image.gif.GifMediaDecoder.decode(java.lang.String, java.io.InputStream) and 1 other context)
+```
+How do I fix this?</historyEntry>
+        <historyEntry timestamp="1740023131193">I'm getting the following error while building my project. The error is: Removing unused resources requires unused code shrinking to be turned on. See http://d.android.com/r/tools/shrink-resources.html for more information
+```
+A problem occurred configuring project ':app'.
+&gt; Removing unused resources requires unused code shrinking to be turned on. See http://d.android.com/r/tools/shrink-resources.html for more information.
+
+* Try:
+&gt; Run with --stacktrace option to get the stack trace.
+&gt; Run with --info or --debug option to get more log output.
+&gt; Run with --scan to get full insights.
+&gt; Get more help at https://help.gradle.org.
+BUILD FAILED in 1s
+Configuration cache entry stored.
+```
+How do I fix this?</historyEntry>
+        <historyEntry timestamp="1739764326478">.awai() will slow down my code</historyEntry>
+        <historyEntry timestamp="1739764257286">private fun fetchFilesAndCalculateContributions(path: String) {
+        val folderRef = firebaseStorage.reference.child(path)
+        fetchFilesInDirectory(folderRef, 0)
+    }
+
+    private fun fetchFilesInDirectory(directory: StorageReference, pendingFolders: Int) {
+        directory.listAll().addOnSuccessListener { listResult -&gt;
+            allFiles.addAll(listResult.items)
+            val prefixes = listResult.prefixes
+            prefixes.forEach { folderRef -&gt;
+                var pending = pendingFolders + prefixes.size
+                Log.d(&quot;RepoDetailsViewModel&quot;,folderRef.name)
+                if (!folderRef.name.startsWith(&quot;.&quot;)) {
+                    pending--
+                    fetchFilesInDirectory(folderRef, pending)
+                }
+            }
+            if (pendingFolders == 0) {
+                calculateLanguageContributions()
+            }
+        }.addOnFailureListener { exception -&gt;
+            Log.e(&quot;RepoDetailsViewModel&quot;,exception.message.toString())
+        }
+    }
+
+    private fun calculateLanguageContributions(files: List&lt;StorageReference&gt; = allFiles) {
+        val languageCount = mutableMapOf&lt;String, Int&gt;()
+        files.forEach { fileRef -&gt;
+            val extension = &quot;.${fileRef.name.substringAfterLast(&quot;.&quot;, missingDelimiterValue = &quot;&quot;).lowercase()}&quot;
+            val language = LanguageData.extensions[extension] ?: &quot;Others&quot;
+            languageCount[language] = (languageCount[language] ?: 0) + 1
+        }
+        _uiState.update {
+            it.copy(languageContributions = languageCount, totalFiles = files.size)
+        }
+    }</historyEntry>
+        <historyEntry timestamp="1739762336268">i want to display top3 + others but it displays top3 including others means only 3
+@Composable
+fun LanguageBarChart(languageData: Map&lt;String, Int&gt;, totalFiles: Int, colors: List&lt;Color&gt;, modifier: Modifier = Modifier) {
+    val sortedLanguages = languageData.entries.sortedByDescending { it.value }
+    val topLanguages: MutableMap&lt;String, Int&gt; = sortedLanguages.take(3).associate { it.key to it.value } as MutableMap&lt;String, Int&gt;
+    var othersTotal = 0
+    sortedLanguages.drop(3).forEach {
+        othersTotal += it.value
+    }
+    if (othersTotal &gt; 0) topLanguages[&quot;Others&quot;] = othersTotal
+    var start = 0F
+    Column(Modifier.fillMaxHeight()) {
+        Card(
+            shape = RoundedCornerShape(8.dp),
+            modifier = modifier.fillMaxWidth().height(20.dp)
+        ) {
+            Canvas(modifier = Modifier.fillMaxSize()) {
+                topLanguages.entries.forEachIndexed { index, entry -&gt;
+                    val proportion = entry.value.toFloat() / totalFiles
+                    val color = colors[index]
+                    val end = start + proportion * size.width
+                    drawIntoCanvas { _ -&gt;
+                        withTransform({}) {
+                            drawRect(
+                                color = color,
+                                topLeft = Offset(start, 0f),
+                                size = Size(end - start, size.height)
+                            )
+                        }
+                    }
+                    start = end
+                }
+            }
+        }
+        Spacer(modifier = Modifier.height(8.dp))
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
+            topLanguages.entries.forEachIndexed { index, entry -&gt;
+                val color = colors.getOrElse(index) { Color.Gray }
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Box(
+                        modifier = Modifier.size(12.dp)
+                            .background(color, shape = CircleShape)
+                    )
+                    Spacer(modifier = Modifier.width(4.dp))
+                    Text(
+                        text = entry.key,
+                        fontSize = 14.sp,
+                        color = MaterialTheme.colorScheme.onBackground
+                    )
+                }
+            }
+        }
+    }
+}</historyEntry>
+        <historyEntry timestamp="1739510507800">Explain: FATAL EXCEPTION: main
+Process: com.example.groot, PID: 32734
+java.lang.IllegalArgumentException: SnapshotStateList(value=[])@34364059 cannot be saved using the current SaveableStateRegistry. The default implementation only supports types which can be stored inside the Bundle. Please consider implementing a custom Saver for this class and pass it to rememberSaveable().
+at androidx.compose.runtime.saveable.RememberSaveableKt.requireCanBeSaved(RememberSaveable.kt:242)
+at androidx.compose.runtime.saveable.RememberSaveableKt.access$requireCanBeSaved(RememberSaveable.kt:1) with tag AndroidRuntime</historyEntry>
+        <historyEntry timestamp="1739506925683">Make suggestions to improve this code:
+```kotlin
+@Serializable
+data object Home : Routes
+
+@Serializable
+data object HomeScreen : Routes
+
+@Serializable
+data object ExploreScreen : Routes
+
+@Serializable
+data object ProfileScreen : Routes
+```</historyEntry>
         <historyEntry timestamp="1738325771261">package com.example.chathub.screens.login
 
 import androidx.compose.foundation.background
