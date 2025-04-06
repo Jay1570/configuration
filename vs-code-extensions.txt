@@ -24,7 +24,6 @@ pkief.material-icon-theme
 postman.postman-for-vscode
 ritwickdey.liveserver
 tomoki1207.pdf
-twxs.cmake
 usernamehw.errorlens
 vscodevim.vim
 xdebug.php-debug

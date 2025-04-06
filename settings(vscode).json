@@ -252,5 +252,7 @@
     "terminal.integrated.defaultProfile.windows": "Command Prompt",
     "files.associations": {
         "*.json": "json"
-    }
+    },
+    "dart.flutterSdkPath": "C:\\flutter\\src",
+    "git.confirmSync": false
 }
