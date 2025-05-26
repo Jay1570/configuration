@@ -1,6 +1,7 @@
 {
     "$schema": "vscode://schemas/settings/default",
     "security.workspace.trust.untrustedFiles": "open",
+    "editor.fontSize": 14,
     "gitlens.defaultDateShortFormat": null,
     "gitlens.defaultDateFormat": null,
     "python.defaultInterpreterPath": "C:\\Program Files\\Python313\\python.exe",
@@ -36,7 +37,7 @@
     "editor.formatOnPaste": true,
     "editor.formatOnSave": true,
     "editor.formatOnType": true,
-    "files.autoSave": "afterDelay",
+    "files.autoSave": "off",
     "explorer.confirmDelete": false,
     "window.titleBarStyle": "custom",
     "explorer.expandSingleFolderWorkspaces": false,
@@ -46,7 +47,7 @@
     "editor.fontLigatures": true,
     "editor.bracketPairColorization.enabled": true,
     "editor.smoothScrolling": true,
-    "editor.mouseWheelZoom": true,
+    "editor.mouseWheelZoom": false,
     "vim.enableNeovim": true,
     "vim.handleKeys": {
         "<C-d>": true,
@@ -173,16 +174,12 @@
     ],
     "editor.tabSize": 4,
     "editor.insertSpaces": true,
-    "editor.wordWrap": "off",
+    "editor.wordWrap": "on",
     "editor.cursorSurroundingLines": 8,
-    "editor.lineNumbers": "relative",
-    "github.copilot.nextEditSuggestions.enabled": true,
+    "editor.lineNumbers": "on",
+    "github.copilot.nextEditSuggestions.enabled": false,
     "github.copilot.enable": {
-        "*": false,
-        "plaintext": true,
-        "markdown": true,
-        "scminput": true,
-        "javascript": false
+        "*": false
     },
     "better-comments.tags": [
         {
@@ -254,5 +251,15 @@
         "*.json": "json"
     },
     "dart.flutterSdkPath": "C:\\flutter\\src",
-    "git.confirmSync": false
+    "git.confirmSync": false,
+    "[javascriptreact]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "git.enableSmartCommit": true,
+    "gitlens.ai.model": "vscode",
+    "gitlens.ai.vscode.model": "copilot:gpt-4o",
+    "gitlens.ai.largePromptWarningThreshold": 50000,
+    "editor.minimap.size": "fit",
+    "editor.minimap.showSlider": "always",
+    "javascript.updateImportsOnFileMove.enabled": "always"
 }
