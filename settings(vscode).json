@@ -37,7 +37,7 @@
     "editor.formatOnPaste": true,
     "editor.formatOnSave": true,
     "editor.formatOnType": true,
-    "files.autoSave": "off",
+    "files.autoSave": "afterDelay",
     "explorer.confirmDelete": false,
     "window.titleBarStyle": "custom",
     "explorer.expandSingleFolderWorkspaces": false,
@@ -174,7 +174,7 @@
     ],
     "editor.tabSize": 4,
     "editor.insertSpaces": true,
-    "editor.wordWrap": "on",
+    "editor.wordWrap": "off",
     "editor.cursorSurroundingLines": 8,
     "editor.lineNumbers": "on",
     "github.copilot.nextEditSuggestions.enabled": false,
@@ -250,7 +250,6 @@
     "files.associations": {
         "*.json": "json"
     },
-    "dart.flutterSdkPath": "C:\\flutter\\src",
     "git.confirmSync": false,
     "[javascriptreact]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -261,5 +260,23 @@
     "gitlens.ai.largePromptWarningThreshold": 50000,
     "editor.minimap.size": "fit",
     "editor.minimap.showSlider": "always",
-    "javascript.updateImportsOnFileMove.enabled": "always"
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "chat.instructionsFilesLocations": {
+        ".github/instructions": true,
+        "/tmp/postman-http-request-post-response.instructions.md": true,
+        "/tmp/postman-http-request-pre-request.instructions.md": true,
+        "/tmp/postman-collections-post-response.instructions.md": true,
+        "/tmp/postman-collections-pre-request.instructions.md": true,
+        "/tmp/postman-folder-post-response.instructions.md": true,
+        "/tmp/postman-folder-pre-request.instructions.md": true
+    },
+    "go.toolsManagement.autoUpdate": true,
+    "[typescript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[typescriptreact]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "postman.mcp.notifications.postmanMCP": false,
+    "typescript.tsserver.maxTsServerMemory": 2048
 }
