@@ -11,11 +11,13 @@ github.copilot
 github.copilot-chat
 github.github-vscode-theme
 golang.go
+ms-azuretools.vscode-containers
 ms-python.debugpy
 ms-python.isort
 ms-python.python
 ms-python.vscode-pylance
-ms-vscode-remote.remote-wsl
+ms-python.vscode-python-envs
+ms-vscode-remote.remote-containers
 ms-vscode.cmake-tools
 ms-vscode.cpptools
 ms-vscode.cpptools-extension-pack
