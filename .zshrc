@@ -14,13 +14,13 @@ export PATH
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-. "$HOME/.cargo/env"
 export PATH="$PATH:$HOME/development/flutter/bin"
 export PATH="$PATH:$HOME/Android/Sdk/platform-tools"
-export CHROME_EXECUTABLE="/opt/brave.com/brave/brave-browser"
+export CHROME_EXECUTABLE="/bin/brave"
 export PATH="$PATH:$HOME/development/flutter/bin:$HOME/development/flutter/bin/cache/dart-sdk/bin"
-export JAVA_HOME="/var/lib/flatpak/app/com.google.AndroidStudio/current/active/files/extra/jbr"
+export JAVA_HOME="/opt/android-studio/jbr"
 export PATH="$JAVA_HOME/bin:$PATH"
+alias code-oss='code-oss --enable-features=UseOzonePlatform --ozone-platform=wayland'
 
 # ZINIT Directory
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
