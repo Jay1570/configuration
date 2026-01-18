@@ -1,7 +1,7 @@
 {
     "$schema": "vscode://schemas/settings/default",
     "security.workspace.trust.untrustedFiles": "open",
-    "editor.fontSize": 14,
+    "workbench.fontSize": 14,
     "gitlens.defaultDateShortFormat": null,
     "gitlens.defaultDateFormat": null,
     "python.defaultInterpreterPath": "C:\\Program Files\\Python313\\python.exe",
@@ -42,7 +42,6 @@
     "window.titleBarStyle": "custom",
     "explorer.expandSingleFolderWorkspaces": false,
     "terminal.integrated.cursorBlinking": true,
-    "editor.cursorBlinking": "blink",
     "editor.fontFamily": "Jetbrains Mono, Consolas, 'Courier New', monospace",
     "editor.fontLigatures": true,
     "editor.bracketPairColorization.enabled": true,
@@ -50,9 +49,7 @@
     "editor.mouseWheelZoom": false,
     "editor.tabSize": 4,
     "editor.insertSpaces": true,
-    "editor.wordWrap": "off",
     "editor.cursorSurroundingLines": 8,
-    "editor.lineNumbers": "on",
     "github.copilot.nextEditSuggestions.enabled": false,
     "github.copilot.enable": {
         "*": false
@@ -166,5 +163,267 @@
         "panel": "never"
     },
     "chat.disableAIFeatures": true,
-    "gitlens.ai.gitkraken.model": "gemini:gemini-2.0-flash"
+    "gitlens.ai.gitkraken.model": "gemini:gemini-2.0-flash",
+    "vim.leader": "<space>",
+    "vim.useSystemClipboard": true,
+    "vim.useCtrlKeys": true,
+    "vim.hlsearch": true,
+    "vim.incsearch": true,
+    "vim.ignorecase": true,
+    "vim.smartcase": true,
+
+    // Show relative line numbers
+    "editor.lineNumbers": "relative",
+
+    // Smooth cursor
+    "editor.cursorBlinking": "solid",
+    "editor.cursorSmoothCaretAnimation": "on",
+
+    // ============================================================================
+    // Normal Mode Keybindings
+    // ============================================================================
+
+    "vim.normalModeKeyBindingsNonRecursive": [
+        // Clear search highlights
+        {
+            "before": ["<Esc>"],
+            "commands": [":nohl"]
+        },
+
+        // File Explorer - <leader>pv
+        {
+            "before": ["<leader>", "p", "v"],
+            "commands": ["workbench.view.explorer"]
+        },
+
+        // Window navigation - Ctrl+hjkl
+        {
+            "before": ["<C-h>"],
+            "commands": ["workbench.action.focusLeftGroup"]
+        },
+        {
+            "before": ["<C-l>"],
+            "commands": ["workbench.action.focusRightGroup"]
+        },
+        {
+            "before": ["<C-j>"],
+            "commands": ["workbench.action.focusBelowGroup"]
+        },
+        {
+            "before": ["<C-k>"],
+            "commands": ["workbench.action.focusAboveGroup"]
+        },
+
+        // File operations
+        {
+            "before": ["<leader>", "f", "f"],
+            "commands": ["workbench.action.quickOpen"]
+        },
+        {
+            "before": ["<leader>", "f", "g"],
+            "commands": ["workbench.action.findInFiles"]
+        },
+        {
+            "before": ["<leader>", "f", "b"],
+            "commands": ["workbench.action.showAllEditors"]
+        },
+        {
+            "before": ["<leader>", "<leader>"],
+            "commands": ["workbench.action.showAllEditors"]
+        },
+
+        // Code navigation
+        {
+            "before": ["g", "d"],
+            "commands": ["editor.action.revealDefinition"]
+        },
+        {
+            "before": ["g", "r"],
+            "commands": ["editor.action.goToReferences"]
+        },
+        {
+            "before": ["g", "i"],
+            "commands": ["editor.action.goToImplementation"]
+        },
+        {
+            "before": ["g", "t"],
+            "commands": ["editor.action.goToTypeDefinition"]
+        },
+        {
+            "before": ["K"],
+            "commands": ["editor.action.showHover"]
+        },
+
+        // LSP/Code actions
+        {
+            "before": ["<leader>", "r", "n"],
+            "commands": ["editor.action.rename"]
+        },
+        {
+            "before": ["<leader>", "c", "a"],
+            "commands": ["editor.action.quickFix"]
+        },
+        {
+            "before": ["<leader>", "f"],
+            "commands": ["editor.action.formatDocument"]
+        },
+
+        // Splits
+        {
+            "before": ["<leader>", "v"],
+            "commands": ["workbench.action.splitEditorRight"]
+        },
+        {
+            "before": ["<leader>", "h"],
+            "commands": ["workbench.action.splitEditorDown"]
+        },
+
+        // Diagnostics
+        {
+            "before": ["<leader>", "q"],
+            "commands": ["workbench.actions.view.problems"]
+        },
+        {
+            "before": ["[", "d"],
+            "commands": ["editor.action.marker.prevInFiles"]
+        },
+        {
+            "before": ["]", "d"],
+            "commands": ["editor.action.marker.nextInFiles"]
+        },
+
+        // Terminal
+        {
+            "before": ["<leader>", "t", "t"],
+            "commands": ["workbench.action.terminal.toggleTerminal"]
+        },
+
+        // Buffer/Tab management
+        {
+            "before": ["<leader>", "b", "d"],
+            "commands": ["workbench.action.closeActiveEditor"]
+        },
+        {
+            "before": ["<Tab>"],
+            "commands": ["workbench.action.nextEditor"]
+        },
+        {
+            "before": ["<S-Tab>"],
+            "commands": ["workbench.action.previousEditor"]
+        },
+
+        // Telescope-like search
+        {
+            "before": ["<leader>", "s", "f"],
+            "commands": ["workbench.action.quickOpen"]
+        },
+        {
+            "before": ["<leader>", "s", "g"],
+            "commands": ["workbench.action.findInFiles"]
+        },
+        {
+            "before": ["<leader>", "s", "h"],
+            "commands": ["workbench.action.showAllSymbols"]
+        }
+    ],
+
+    // ============================================================================
+    // Visual Mode Keybindings
+    // ============================================================================
+
+    "vim.visualModeKeyBindingsNonRecursive": [
+        // Comment toggle in visual mode
+        {
+            "before": ["g", "c"],
+            "commands": ["editor.action.commentLine"]
+        },
+
+        // Code action in visual mode
+        {
+            "before": ["<leader>", "c", "a"],
+            "commands": ["editor.action.quickFix"]
+        },
+
+        // Stay in visual mode when indenting
+        {
+            "before": [">"],
+            "commands": ["editor.action.indentLines"]
+        },
+        {
+            "before": ["<"],
+            "commands": ["editor.action.outdentLines"]
+        }
+    ],
+
+    //============================================================================
+    // Insert Mode Keybindings
+    // ============================================================================
+
+    "vim.insertModeKeyBindings": [
+        // Exit insert mode with jk
+        {
+            "before": ["j", "k"],
+            "after": ["<Esc>"]
+        }
+    ],
+
+    // ============================================================================
+    // Handled Keys (Let Vim handle these)
+    // ============================================================================
+
+    "vim.handleKeys": {
+        "<C-a>": false,
+        "<C-f>": true,
+        "<C-c>": false,
+        "<C-v>": false,
+        "<C-x>": false,
+        "<C-z>": false,
+        "<C-y>": false,
+        "<C-n>": true,
+        "<C-p>": true,
+        "<C-h>": true,
+        "<C-j>": true,
+        "<C-k>": true,
+        "<C-l>": true,
+        "<C-w>": true,
+        "<C-d>": true,
+        "<C-u>": true
+    },
+
+    // ============================================================================
+    // Additional Vim Settings
+    // ============================================================================
+
+    "vim.easymotion": true,
+    "vim.surround": true,
+    "vim.highlightedyank.enable": true,
+    "vim.highlightedyank.duration": 200,
+
+    // Scroll settings
+    "vim.scroll": 10,
+
+    // Status bar color based on mode
+    "vim.statusBarColorControl": true,
+    "vim.statusBarColors.normal": ["#005f5f", "#ffffff"],
+    "vim.statusBarColors.insert": ["#5f0000", "#ffffff"],
+    "vim.statusBarColors.visual": ["#5f00af", "#ffffff"],
+    "vim.statusBarColors.visualline": ["#5f00af", "#ffffff"],
+    "vim.statusBarColors.visualblock": ["#5f00af", "#ffffff"],
+    "vim.statusBarColors.replace": ["#5f5f00", "#ffffff"],
+
+    // ============================================================================
+    // Editor Settings for Better Vim Experience
+    // ============================================================================
+
+    "editor.scrollBeyondLastLine": false,
+    "editor.wordWrap": "off",
+    "workbench.list.automaticKeyboardNavigation": false,
+    "editor.suggest.insertMode": "replace",
+    "workbench.colorCustomizations": {
+        "statusBar.background": "#005f5f",
+        "statusBar.noFolderBackground": "#005f5f",
+        "statusBar.debuggingBackground": "#005f5f",
+        "statusBar.foreground": "#ffffff",
+        "statusBar.debuggingForeground": "#ffffff"
+    }
 }
