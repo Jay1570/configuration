@@ -2,12 +2,12 @@
 
 mkdir -p ~/Videos/recordings
 
-# select speaker (sink)
-speaker=$(pactl list sinks short | awk '{print $2}' | wofi --dmenu -p "Select Speaker")
-[ -z "$speaker" ] && exit 1
+# Select speaker monitor (what's playing through speakers)
+speaker_monitor=$(pactl list sources short | grep monitor | awk '{print $2}' | wofi --dmenu -p "Select Speaker Monitor")
+[ -z "$speaker_monitor" ] && exit 1
 
-# select mic (source)
-mic=$(pactl list sources short | awk '{print $2}' | wofi --dmenu -p "Select Microphone")
+# Select mic (source)
+mic=$(pactl list sources short | grep -v monitor | awk '{print $2}' | wofi --dmenu -p "Select Microphone")
 [ -z "$mic" ] && exit 1
 
 outfile=~/Videos/recordings/rec-$(date +'%Y%m%d-%H%M%S').mkv

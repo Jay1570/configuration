@@ -1,9 +1,8 @@
 {
     "$schema": "vscode://schemas/settings/default",
     "security.workspace.trust.untrustedFiles": "open",
-    "workbench.fontSize": 14,
-    "gitlens.defaultDateShortFormat": null,
-    "gitlens.defaultDateFormat": null,
+    "js/ts.tsserver.experimental.enableProjectDiagnostics": true,
+    "editor.fontSize": 14,
     "python.defaultInterpreterPath": "C:\\Program Files\\Python313\\python.exe",
     "[c]": {
         "editor.wordBasedSuggestions": "off",
@@ -28,7 +27,6 @@
         "editor.insertSpaces": true
     },
     "window.confirmSaveUntitledWorkspace": false,
-    "gitlens.rebaseEditor.ordering": "asc",
     "[php]": {
         "editor.defaultFormatter": "bmewburn.vscode-intelephense-client"
     },
@@ -50,10 +48,6 @@
     "editor.tabSize": 4,
     "editor.insertSpaces": true,
     "editor.cursorSurroundingLines": 8,
-    "github.copilot.nextEditSuggestions.enabled": false,
-    "github.copilot.enable": {
-        "*": false
-    },
     "better-comments.tags": [
         {
             "tag": "TODO:",
@@ -127,12 +121,8 @@
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "git.enableSmartCommit": true,
-    "gitlens.ai.model": "gitkraken",
-    "gitlens.ai.vscode.model": "copilot:gpt-4o",
-    "gitlens.ai.largePromptWarningThreshold": 50000,
     "editor.minimap.size": "fill",
     "editor.minimap.showSlider": "always",
-    "javascript.updateImportsOnFileMove.enabled": "always",
     "chat.instructionsFilesLocations": {
         ".github/instructions": true,
         "/tmp/postman-http-request-post-response.instructions.md": true,
@@ -149,21 +139,13 @@
     "[typescriptreact]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
-    "postman.mcp.notifications.postmanMCP": false,
-    "typescript.tsserver.maxTsServerMemory": 2048,
+    "js/ts.tsserver.maxMemory": 2048,
     "extensions.experimental.affinity": {
         "asvetliakov.vscode-neovim": 1
     },
-    "vscode-neovim.compositeKeys": {},
-    "workbench.colorTheme": "GitHub Dark Default",
     "workbench.secondarySideBar.defaultVisibility": "hidden",
     "git.openRepositoryInParentFolders": "never",
-    "workbench.commandPalette.showAskInChat": false,
-    "chat.implicitContext.enabled": {
-        "panel": "never"
-    },
     "chat.disableAIFeatures": true,
-    "gitlens.ai.gitkraken.model": "gemini:gemini-2.0-flash",
     "vim.leader": "<space>",
     "vim.useSystemClipboard": true,
     "vim.useCtrlKeys": true,
@@ -417,7 +399,6 @@
 
     "editor.scrollBeyondLastLine": false,
     "editor.wordWrap": "off",
-    "workbench.list.automaticKeyboardNavigation": false,
     "editor.suggest.insertMode": "replace",
     "workbench.colorCustomizations": {
         "statusBar.background": "#005f5f",
@@ -425,5 +406,8 @@
         "statusBar.debuggingBackground": "#005f5f",
         "statusBar.foreground": "#ffffff",
         "statusBar.debuggingForeground": "#ffffff"
-    }
+    },
+    "js/ts.updateImportsOnFileMove.enabled": "always",
+    "http.systemCertificatesNode": true,
+    "workbench.colorTheme": "GitHub Dark Default"
 }
