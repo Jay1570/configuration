@@ -13,11 +13,12 @@ export PATH
 
 export PATH="$PATH:$HOME/development/flutter/bin"
 export PATH="$PATH:$HOME/Android/Sdk/platform-tools"
-export CHROME_EXECUTABLE="/bin/brave"
+export CHROME_EXECUTABLE="brave"
 export PATH="$PATH:$HOME/development/flutter/bin:$HOME/development/flutter/bin/cache/dart-sdk/bin"
 export JAVA_HOME="/opt/android-studio/jbr"
 export PATH="$JAVA_HOME/bin:$PATH"
 alias code-oss='code-oss --enable-features=UseOzonePlatform --ozone-platform=wayland'
+export PATH="$PATH":"$HOME/.pub-cache/bin"
 
 # ZINIT Directory
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
@@ -96,3 +97,7 @@ eval "$(zoxide init --cmd cd zsh)"
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

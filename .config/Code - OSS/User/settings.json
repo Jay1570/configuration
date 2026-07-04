@@ -3,7 +3,6 @@
     "security.workspace.trust.untrustedFiles": "open",
     "js/ts.tsserver.experimental.enableProjectDiagnostics": true,
     "editor.fontSize": 14,
-    "python.defaultInterpreterPath": "C:\\Program Files\\Python313\\python.exe",
     "[c]": {
         "editor.wordBasedSuggestions": "off",
         "editor.suggest.insertMode": "replace",
@@ -21,15 +20,13 @@
         "editor.rulers": [80],
         "editor.selectionHighlight": false,
         "editor.suggestSelection": "first",
-        "editor.tabCompletion": "onlySnippets",
+        "editor.tabCompletion": "on",
         "editor.wordBasedSuggestions": "off",
-        "editor.tabSize": 4,
-        "editor.insertSpaces": true
+        "editor.tabSize": 2,
+        "editor.insertSpaces": true,
+        "editor.defaultFormatter": "Dart-Code.dart-code"
     },
     "window.confirmSaveUntitledWorkspace": false,
-    "[php]": {
-        "editor.defaultFormatter": "bmewburn.vscode-intelephense-client"
-    },
     "workbench.iconTheme": "material-icon-theme",
     "window.restoreWindows": "none",
     "editor.formatOnPaste": true,
@@ -124,13 +121,7 @@
     "editor.minimap.size": "fill",
     "editor.minimap.showSlider": "always",
     "chat.instructionsFilesLocations": {
-        ".github/instructions": true,
-        "/tmp/postman-http-request-post-response.instructions.md": true,
-        "/tmp/postman-http-request-pre-request.instructions.md": true,
-        "/tmp/postman-collections-post-response.instructions.md": true,
-        "/tmp/postman-collections-pre-request.instructions.md": true,
-        "/tmp/postman-folder-post-response.instructions.md": true,
-        "/tmp/postman-folder-pre-request.instructions.md": true
+        ".github/instructions": true
     },
     "go.toolsManagement.autoUpdate": true,
     "[typescript]": {
@@ -153,31 +144,25 @@
     "vim.incsearch": true,
     "vim.ignorecase": true,
     "vim.smartcase": true,
-
     // Show relative line numbers
     "editor.lineNumbers": "relative",
-
     // Smooth cursor
     "editor.cursorBlinking": "solid",
     "editor.cursorSmoothCaretAnimation": "on",
-
     // ============================================================================
     // Normal Mode Keybindings
     // ============================================================================
-
     "vim.normalModeKeyBindingsNonRecursive": [
         // Clear search highlights
         {
             "before": ["<Esc>"],
             "commands": [":nohl"]
         },
-
         // File Explorer - <leader>pv
         {
             "before": ["<leader>", "p", "v"],
             "commands": ["workbench.view.explorer"]
         },
-
         // Window navigation - Ctrl+hjkl
         {
             "before": ["<C-h>"],
@@ -195,7 +180,6 @@
             "before": ["<C-k>"],
             "commands": ["workbench.action.focusAboveGroup"]
         },
-
         // File operations
         {
             "before": ["<leader>", "f", "f"],
@@ -213,7 +197,6 @@
             "before": ["<leader>", "<leader>"],
             "commands": ["workbench.action.showAllEditors"]
         },
-
         // Code navigation
         {
             "before": ["g", "d"],
@@ -235,7 +218,6 @@
             "before": ["K"],
             "commands": ["editor.action.showHover"]
         },
-
         // LSP/Code actions
         {
             "before": ["<leader>", "r", "n"],
@@ -249,7 +231,6 @@
             "before": ["<leader>", "f"],
             "commands": ["editor.action.formatDocument"]
         },
-
         // Splits
         {
             "before": ["<leader>", "v"],
@@ -259,7 +240,6 @@
             "before": ["<leader>", "h"],
             "commands": ["workbench.action.splitEditorDown"]
         },
-
         // Diagnostics
         {
             "before": ["<leader>", "q"],
@@ -273,13 +253,11 @@
             "before": ["]", "d"],
             "commands": ["editor.action.marker.nextInFiles"]
         },
-
         // Terminal
         {
             "before": ["<leader>", "t", "t"],
             "commands": ["workbench.action.terminal.toggleTerminal"]
         },
-
         // Buffer/Tab management
         {
             "before": ["<leader>", "b", "d"],
@@ -293,7 +271,6 @@
             "before": ["<S-Tab>"],
             "commands": ["workbench.action.previousEditor"]
         },
-
         // Telescope-like search
         {
             "before": ["<leader>", "s", "f"],
@@ -308,24 +285,20 @@
             "commands": ["workbench.action.showAllSymbols"]
         }
     ],
-
     // ============================================================================
     // Visual Mode Keybindings
     // ============================================================================
-
     "vim.visualModeKeyBindingsNonRecursive": [
         // Comment toggle in visual mode
         {
             "before": ["g", "c"],
             "commands": ["editor.action.commentLine"]
         },
-
         // Code action in visual mode
         {
             "before": ["<leader>", "c", "a"],
             "commands": ["editor.action.quickFix"]
         },
-
         // Stay in visual mode when indenting
         {
             "before": [">"],
@@ -336,11 +309,9 @@
             "commands": ["editor.action.outdentLines"]
         }
     ],
-
     //============================================================================
     // Insert Mode Keybindings
     // ============================================================================
-
     "vim.insertModeKeyBindings": [
         // Exit insert mode with jk
         {
@@ -348,11 +319,9 @@
             "after": ["<Esc>"]
         }
     ],
-
     // ============================================================================
     // Handled Keys (Let Vim handle these)
     // ============================================================================
-
     "vim.handleKeys": {
         "<C-a>": false,
         "<C-f>": true,
@@ -361,7 +330,7 @@
         "<C-x>": false,
         "<C-z>": false,
         "<C-y>": false,
-        "<C-n>": true,
+        "<C-n>": false,
         "<C-p>": true,
         "<C-h>": true,
         "<C-j>": true,
@@ -371,19 +340,15 @@
         "<C-d>": true,
         "<C-u>": true
     },
-
     // ============================================================================
     // Additional Vim Settings
     // ============================================================================
-
     "vim.easymotion": true,
     "vim.surround": true,
     "vim.highlightedyank.enable": true,
     "vim.highlightedyank.duration": 200,
-
     // Scroll settings
     "vim.scroll": 10,
-
     // Status bar color based on mode
     "vim.statusBarColorControl": true,
     "vim.statusBarColors.normal": ["#005f5f", "#ffffff"],
@@ -392,11 +357,9 @@
     "vim.statusBarColors.visualline": ["#5f00af", "#ffffff"],
     "vim.statusBarColors.visualblock": ["#5f00af", "#ffffff"],
     "vim.statusBarColors.replace": ["#5f5f00", "#ffffff"],
-
     // ============================================================================
     // Editor Settings for Better Vim Experience
     // ============================================================================
-
     "editor.scrollBeyondLastLine": false,
     "editor.wordWrap": "off",
     "editor.suggest.insertMode": "replace",
@@ -409,5 +372,9 @@
     },
     "js/ts.updateImportsOnFileMove.enabled": "always",
     "http.systemCertificatesNode": true,
-    "workbench.colorTheme": "GitHub Dark Default"
+    "workbench.colorTheme": "GitHub Dark Default",
+    "js/ts.preferences.importModuleSpecifierEnding": "js",
+    "js/ts.preferences.includePackageJsonAutoImports": "on",
+    "js/ts.preferences.importModuleSpecifier": "non-relative",
+    "liveServer.settings.donotShowInfoMsg": true
 }

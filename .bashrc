@@ -27,7 +27,4 @@ unset rc
 . "$HOME/.cargo/env"
 export PATH="$PATH:$HOME/development/flutter/bin"
 export PATH="$PATH:$HOME/Android/Sdk/platform-tools"
-export CHROME_EXECUTABLE="/opt/brave.com/brave/brave-browser"
 export PATH="$PATH:$HOME/development/flutter/bin:$HOME/development/flutter/bin/cache/dart-sdk/bin"
-export JAVA_HOME="/var/lib/flatpak/app/com.google.AndroidStudio/current/active/files/extra/jbr"
-export PATH="$JAVA_HOME/bin:$PATH"
