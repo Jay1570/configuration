@@ -234,10 +234,10 @@ hl.bind(mainMod .. " + right", hl.dsp.focus({ direction = "right" }))
 hl.bind(mainMod .. " + up", hl.dsp.focus({ direction = "up" }))
 hl.bind(mainMod .. " + down", hl.dsp.focus({ direction = "down" }))
 
-hl.bind(mainMod .. " + R", hl.dsp.exec_cmd("~/.local/bin/screen-record-audio.sh"))
-hl.bind(mainMod .. " + SHIFT + R", hl.dsp.exec_cmd("~/.local/bin/screen-record-speaker.sh"))
-hl.bind(mainMod .. " + CTRL + R", hl.dsp.exec_cmd("~/.local/bin/screen-record.sh"))
-hl.bind(mainMod .. " + ALT + R", hl.dsp.exec_cmd("pkill -SIGINT wf-recorder"))
+-- hl.bind(mainMod .. " + R", hl.dsp.exec_cmd("~/.local/bin/screen-record-audio.sh"))
+-- hl.bind(mainMod .. " + SHIFT + R", hl.dsp.exec_cmd("~/.local/bin/screen-record-speaker.sh"))
+-- hl.bind(mainMod .. " + CTRL + R", hl.dsp.exec_cmd("~/.local/bin/screen-record.sh"))
+-- hl.bind(mainMod .. " + ALT + R", hl.dsp.exec_cmd("pkill -SIGINT wf-recorder"))
 
 hl.bind(mainMod .. " + 1", hl.dsp.focus({ workspace = 1 }))
 hl.bind(mainMod .. " + 2", hl.dsp.focus({ workspace = 2 }))
@@ -304,8 +304,8 @@ end)
 
 hl.config({
 	general = {
-		gaps_in = 5,
-		gaps_out = 5,
+		gaps_in = 2,
+		gaps_out = 2,
 		border_size = 1,
 		-- https://wiki.hypr.land/Configuring/Variables/#variable-types for info about colors
 		col = {
@@ -320,11 +320,11 @@ hl.config({
 	},
 	-- https://wiki.hypr.land/Configuring/Variables/#decoration
 	decoration = {
-		rounding = 10,
-		rounding_power = 2,
+		rounding = 3,
+		rounding_power = 10,
 		-- Change transparency of focused and unfocused windows
-		active_opacity = 0.9,
-		inactive_opacity = 0.7,
+		active_opacity = 0.96,
+		inactive_opacity = 0.9,
 		shadow = {
 			enabled = true,
 			range = 4,

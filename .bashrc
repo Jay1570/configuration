@@ -28,3 +28,7 @@ unset rc
 export PATH="$PATH:$HOME/development/flutter/bin"
 export PATH="$PATH:$HOME/Android/Sdk/platform-tools"
 export PATH="$PATH:$HOME/development/flutter/bin:$HOME/development/flutter/bin/cache/dart-sdk/bin"
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
