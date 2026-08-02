@@ -443,3 +443,6 @@ hl.on("hyprland.start", function()
 	hl.exec_cmd("wl-paste --type text --watch 'xclip -o -selection clipboard | wl-copy'")
 	hl.exec_cmd("clipse -listen")
 end)
+
+-- HyprMod managed settings
+require("hyprland-gui")
