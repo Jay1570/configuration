@@ -5,4 +5,7 @@ hl.config({
     decoration = {
         rounding_power = 2.0,
     },
+    misc = {
+        vrr = 1,
+    },
 })

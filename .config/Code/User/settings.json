@@ -1,5 +1,6 @@
 {
     "$schema": "vscode://schemas/settings/default",
+    "workbench.colorTheme": "Dark 2026",
     "security.workspace.trust.untrustedFiles": "open",
     "js/ts.tsserver.experimental.enableProjectDiagnostics": true,
     "editor.fontSize": 14,
@@ -27,7 +28,6 @@
         "editor.defaultFormatter": "Dart-Code.dart-code"
     },
     "window.confirmSaveUntitledWorkspace": false,
-    "workbench.iconTheme": "material-icon-theme",
     "window.restoreWindows": "none",
     "editor.formatOnPaste": true,
     "editor.formatOnSave": true,
@@ -336,8 +336,8 @@
         "<C-j>": true,
         "<C-k>": true,
         "<C-l>": true,
-        "<C-w>": true,
-        "<C-d>": true,
+        "<C-w>": false,
+        "<C-d>": false,
         "<C-u>": true
     },
     // ============================================================================
@@ -372,9 +372,9 @@
     },
     "js/ts.updateImportsOnFileMove.enabled": "always",
     "http.systemCertificatesNode": true,
-    "workbench.colorTheme": "GitHub Dark Default",
     "js/ts.preferences.importModuleSpecifierEnding": "js",
     "js/ts.preferences.includePackageJsonAutoImports": "on",
     "js/ts.preferences.importModuleSpecifier": "non-relative",
-    "liveServer.settings.donotShowInfoMsg": true
+    "liveServer.settings.donotShowInfoMsg": true,
+    "dart.flutterSdkPath": "/home/jay1570/development/flutter"
 }
