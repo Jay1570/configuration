@@ -364,9 +364,10 @@
     "editor.wordWrap": "off",
     "editor.suggest.insertMode": "replace",
     "workbench.colorCustomizations": {
-        "statusBar.background": "#5f0000",
-        "statusBar.noFolderBackground": "#5f0000",
-        "statusBar.debuggingBackground": "#5f0000",
+        "statusBar.background": "#005f5f",
+        "statusBar.noFolderBackground": "#005f5f",
+        "statusBar.noFolderForeground": "#ffffff",
+        "statusBar.debuggingBackground": "#005f5f",
         "statusBar.foreground": "#ffffff",
         "statusBar.debuggingForeground": "#ffffff"
     },
@@ -376,5 +377,6 @@
     "js/ts.preferences.includePackageJsonAutoImports": "on",
     "js/ts.preferences.importModuleSpecifier": "non-relative",
     "liveServer.settings.donotShowInfoMsg": true,
-    "dart.flutterSdkPath": "/home/jay1570/development/flutter"
+    "dart.flutterSdkPath": "/home/jay1570/development/flutter",
+    "diffEditor.ignoreTrimWhitespace": true
 }
