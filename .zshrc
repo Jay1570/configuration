@@ -90,6 +90,7 @@ alias ls='ls --color'
 # Shell integrations
 eval "$(fzf --zsh)"
 eval "$(zoxide init --cmd cd zsh)"
+eval "$(direnv hook zsh)"
 
 # bun completions
 [ -s "/home/jay1570/.bun/_bun" ] && source "/home/jay1570/.bun/_bun"

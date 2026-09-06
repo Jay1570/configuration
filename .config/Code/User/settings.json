@@ -1,6 +1,7 @@
 {
     "$schema": "vscode://schemas/settings/default",
     "workbench.colorTheme": "Dark 2026",
+    "jdk.jdkhome": "/usr/lib/jvm/java-25-openjdk",
     "security.workspace.trust.untrustedFiles": "open",
     "js/ts.tsserver.experimental.enableProjectDiagnostics": true,
     "editor.fontSize": 14,
@@ -27,6 +28,17 @@
         "editor.insertSpaces": true,
         "editor.defaultFormatter": "Dart-Code.dart-code"
     },
+    "[java]": {
+        "editor.defaultFormatter": "redhat.java"
+    },
+    "java.configuration.runtimes": [
+        {
+            "name": "JavaSE-25",
+            "path": "/usr/lib/jvm/java-25-openjdk",
+            "default": true
+        }
+    ],
+    "java.format.comments.enabled": true,
     "window.confirmSaveUntitledWorkspace": false,
     "window.restoreWindows": "none",
     "editor.formatOnPaste": true,
@@ -364,10 +376,10 @@
     "editor.wordWrap": "off",
     "editor.suggest.insertMode": "replace",
     "workbench.colorCustomizations": {
-        "statusBar.background": "#005f5f",
-        "statusBar.noFolderBackground": "#005f5f",
+        "statusBar.background": "#5f0000",
+        "statusBar.noFolderBackground": "#5f0000",
         "statusBar.noFolderForeground": "#ffffff",
-        "statusBar.debuggingBackground": "#005f5f",
+        "statusBar.debuggingBackground": "#5f0000",
         "statusBar.foreground": "#ffffff",
         "statusBar.debuggingForeground": "#ffffff"
     },
@@ -378,5 +390,8 @@
     "js/ts.preferences.importModuleSpecifier": "non-relative",
     "liveServer.settings.donotShowInfoMsg": true,
     "dart.flutterSdkPath": "/home/jay1570/development/flutter",
-    "diffEditor.ignoreTrimWhitespace": true
+    "diffEditor.ignoreTrimWhitespace": true,
+    "intellij.region": "apac",
+    "intellij.dataSharing": "none",
+    "jdk.telemetry.enabled": false
 }
