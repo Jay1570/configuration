@@ -1,0 +1,60 @@
+[clipboard-indicator]
+clear-on-boot=true
+confirm-clear=true
+confirm-pinned-delete=true
+history-size=100
+move-item-first=true
+toggle-menu=['<Shift><Super>v']
+
+[gsconnect]
+devices=['6d65012c59b441299b436707c5ff89da', '96c2eb87dbb24d048d3b4652440f88f0']
+enabled=true
+missing-openssl=false
+name='JAY'
+show-indicators=false
+
+[gsconnect/device/6d65012c59b441299b436707c5ff89da]
+certificate-pem='-----BEGIN CERTIFICATE-----\nMIIBjDCCATGgAwIBAgIBATAKBggqhkjOPQQDBDBPMSkwJwYDVQQDDCA2ZDY1MDEy\nYzU5YjQ0MTI5OWI0MzY3MDdjNWZmODlkYTEUMBIGA1UECwwLS0RFIENvbm5lY3Qx\nDDAKBgNVBAoMA0tERTAeFw0yNDA2MDgxODMwMDBaFw0zNTA2MDgxODMwMDBaME8x\nKTAnBgNVBAMMIDZkNjUwMTJjNTliNDQxMjk5YjQzNjcwN2M1ZmY4OWRhMRQwEgYD\nVQQLDAtLREUgQ29ubmVjdDEMMAoGA1UECgwDS0RFMFkwEwYHKoZIzj0CAQYIKoZI\nzj0DAQcDQgAEQeBektImcHFhokxl6NOFgmGDA3tvfD+EwahA3cba2zF3a5grHvpi\nS3nisr1vgP2fNCxCuPp/E2MWU58PAAMPlTAKBggqhkjOPQQDBANJADBGAiEAyXde\nTgMRFFT5q9iOTDNma9qt8OR4vdMSfDsZusqPy6oCIQDtwEbY/pT902VPIpnGSdAV\nfWfT+7QAaDbMMiL9S+mmFg==\n-----END CERTIFICATE-----\n'
+incoming-capabilities=['kdeconnect.battery', 'kdeconnect.clipboard', 'kdeconnect.clipboard.connect', 'kdeconnect.contacts.request_all_uids_timestamps', 'kdeconnect.contacts.request_vcards_by_uid', 'kdeconnect.findmyphone.request', 'kdeconnect.mousepad.keyboardstate', 'kdeconnect.mousepad.request', 'kdeconnect.mpris', 'kdeconnect.mpris.request', 'kdeconnect.notification', 'kdeconnect.notification.action', 'kdeconnect.notification.reply', 'kdeconnect.notification.request', 'kdeconnect.ping', 'kdeconnect.runcommand', 'kdeconnect.sftp.request', 'kdeconnect.share.request', 'kdeconnect.share.request.update', 'kdeconnect.sms.request', 'kdeconnect.sms.request_attachment', 'kdeconnect.sms.request_conversation', 'kdeconnect.sms.request_conversations', 'kdeconnect.systemvolume', 'kdeconnect.telephony.request', 'kdeconnect.telephony.request_mute']
+last-connection='lan://192.168.100.252:1716'
+name='Galaxy F14 5G'
+outgoing-capabilities=['kdeconnect.battery', 'kdeconnect.clipboard', 'kdeconnect.clipboard.connect', 'kdeconnect.connectivity_report', 'kdeconnect.contacts.response_uids_timestamps', 'kdeconnect.contacts.response_vcards', 'kdeconnect.findmyphone.request', 'kdeconnect.mousepad.echo', 'kdeconnect.mousepad.keyboardstate', 'kdeconnect.mousepad.request', 'kdeconnect.mpris', 'kdeconnect.mpris.request', 'kdeconnect.notification', 'kdeconnect.notification.request', 'kdeconnect.ping', 'kdeconnect.presenter', 'kdeconnect.runcommand.request', 'kdeconnect.sftp', 'kdeconnect.share.request', 'kdeconnect.sms.attachment_file', 'kdeconnect.sms.messages', 'kdeconnect.systemvolume.request', 'kdeconnect.telephony']
+paired=true
+supported-plugins=['battery', 'clipboard', 'connectivity_report', 'contacts', 'findmyphone', 'mousepad', 'mpris', 'notification', 'ping', 'presenter', 'runcommand', 'sftp', 'share', 'sms', 'systemvolume', 'telephony']
+type='phone'
+
+[gsconnect/device/6d65012c59b441299b436707c5ff89da/plugin/battery]
+custom-battery-notification-value=uint32 80
+send-statistics=true
+
+[gsconnect/device/6d65012c59b441299b436707c5ff89da/plugin/notification]
+applications='{"Power":{"iconName":"org.gnome.Settings-power-symbolic","enabled":true},"Software":{"iconName":"org.gnome.Software","enabled":true},"Clocks":{"iconName":"org.gnome.clocks","enabled":true},"Color Management":{"iconName":"org.gnome.Settings-color-symbolic","enabled":true},"Printers":{"iconName":"org.gnome.Settings-printers-symbolic","enabled":true},"File Roller":{"iconName":"org.gnome.FileRoller","enabled":true},"Events and Tasks Reminders":{"iconName":"org.gnome.Evolution-alarm-notify","enabled":true},"Disk Usage Analyzer":{"iconName":"org.gnome.baobab","enabled":true},"Files":{"iconName":"org.gnome.Nautilus","enabled":true},"Console":{"iconName":"org.gnome.Console","enabled":true},"Disks":{"iconName":"org.gnome.DiskUtility","enabled":true},"NetworkManager Applet":{"iconName":"nm-device-wireless","enabled":true},"Date & Time":{"iconName":"org.gnome.Settings-time-symbolic","enabled":true},"Online Accounts":{"iconName":"org.gnome.goa-daemon-symbolic","enabled":true}}'
+
+[gsconnect/device/6d65012c59b441299b436707c5ff89da/plugin/share]
+receive-directory='/home/jay1570/Downloads'
+
+[gsconnect/device/96c2eb87dbb24d048d3b4652440f88f0]
+certificate-pem='-----BEGIN CERTIFICATE-----\nMIIBjDCCATGgAwIBAgIBATAKBggqhkjOPQQDBDBPMSkwJwYDVQQDDCA5NmMyZWI4\nN2RiYjI0ZDA0OGQzYjQ2NTI0NDBmODhmMDEUMBIGA1UECwwLS0RFIENvbm5lY3Qx\nDDAKBgNVBAoMA0tERTAeFw0yNTA5MDUxODMwMDBaFw0zNjA5MDUxODMwMDBaME8x\nKTAnBgNVBAMMIDk2YzJlYjg3ZGJiMjRkMDQ4ZDNiNDY1MjQ0MGY4OGYwMRQwEgYD\nVQQLDAtLREUgQ29ubmVjdDEMMAoGA1UECgwDS0RFMFkwEwYHKoZIzj0CAQYIKoZI\nzj0DAQcDQgAEB5MlsHYOca/+8KXPj40vfjWDMWcGsHQ+ZGR2rXfI5N2V8yyq7RP8\nDsJxIbWp95zHh9SfBMG+BzFifCzBUxfSmzAKBggqhkjOPQQDBANJADBGAiEAn0CM\nkIYRRwOEJ8hCIICvhSQc7P5YXE3Tpie7NRrjrMICIQCtwTu46xVahuhBubZQ/Ed5\nigLIKvwpbwSaExylMKqPCw==\n-----END CERTIFICATE-----\n'
+incoming-capabilities=['kdeconnect.battery', 'kdeconnect.clipboard', 'kdeconnect.clipboard.connect', 'kdeconnect.contacts.request_all_uids_timestamps', 'kdeconnect.contacts.request_vcards_by_uid', 'kdeconnect.findmyphone.request', 'kdeconnect.mousepad.keyboardstate', 'kdeconnect.mousepad.request', 'kdeconnect.mpris', 'kdeconnect.mpris.request', 'kdeconnect.notification', 'kdeconnect.notification.action', 'kdeconnect.notification.reply', 'kdeconnect.notification.request', 'kdeconnect.ping', 'kdeconnect.runcommand', 'kdeconnect.runcommand.output', 'kdeconnect.sftp.request', 'kdeconnect.share.request', 'kdeconnect.share.request.update', 'kdeconnect.shareinputdevices.request', 'kdeconnect.sms.request', 'kdeconnect.sms.request_attachment', 'kdeconnect.sms.request_conversation', 'kdeconnect.sms.request_conversations', 'kdeconnect.systemvolume', 'kdeconnect.telephony.request_mute']
+last-connection='lan://192.168.100.252:1716'
+name='Galaxy F14 5G'
+outgoing-capabilities=['kdeconnect.battery', 'kdeconnect.clipboard', 'kdeconnect.clipboard.connect', 'kdeconnect.connectivity_report', 'kdeconnect.contacts.response_uids_timestamps', 'kdeconnect.contacts.response_vcards', 'kdeconnect.digitizer', 'kdeconnect.digitizer.session', 'kdeconnect.findmyphone.request', 'kdeconnect.mousepad.echo', 'kdeconnect.mousepad.keyboardstate', 'kdeconnect.mousepad.request', 'kdeconnect.mpris', 'kdeconnect.mpris.request', 'kdeconnect.notification', 'kdeconnect.notification.request', 'kdeconnect.ping', 'kdeconnect.presenter', 'kdeconnect.runcommand.request', 'kdeconnect.sftp', 'kdeconnect.share.request', 'kdeconnect.shareinputdevices', 'kdeconnect.sms.attachment_file', 'kdeconnect.sms.messages', 'kdeconnect.systemvolume.request', 'kdeconnect.telephony']
+paired=true
+supported-plugins=['battery', 'clipboard', 'connectivity_report', 'contacts', 'findmyphone', 'mousepad', 'mpris', 'notification', 'ping', 'presenter', 'runcommand', 'sftp', 'share', 'sms', 'systemvolume', 'telephony']
+type='phone'
+
+[gsconnect/device/96c2eb87dbb24d048d3b4652440f88f0/plugin/battery]
+custom-battery-notification-value=uint32 80
+
+[gsconnect/device/96c2eb87dbb24d048d3b4652440f88f0/plugin/notification]
+applications='{"Printers":{"iconName":"org.gnome.Settings-printers-symbolic","enabled":true},"Events and Tasks Reminders":{"iconName":"org.gnome.Evolution-alarm-notify","enabled":true},"Disks":{"iconName":"org.gnome.DiskUtility","enabled":true},"Software":{"iconName":"org.gnome.Software","enabled":true},"Date & Time":{"iconName":"org.gnome.Settings-time-symbolic","enabled":true},"Online Accounts":{"iconName":"org.gnome.goa-daemon-symbolic","enabled":true},"Disk Usage Analyzer":{"iconName":"org.gnome.baobab","enabled":true},"Power":{"iconName":"org.gnome.Settings-power-symbolic","enabled":true},"Console":{"iconName":"org.gnome.Console","enabled":true},"Color Management":{"iconName":"org.gnome.Settings-color-symbolic","enabled":true},"Files":{"iconName":"org.gnome.Nautilus","enabled":true},"Clocks":{"iconName":"org.gnome.clocks","enabled":true}}'
+
+[gsconnect/device/96c2eb87dbb24d048d3b4652440f88f0/plugin/share]
+receive-directory='/home/jay1570/Downloads'
+
+[gsconnect/preferences]
+window-maximized=true
+
+[hidetopbar]
+mouse-sensitive=true
+mouse-sensitive-fullscreen-window=false
