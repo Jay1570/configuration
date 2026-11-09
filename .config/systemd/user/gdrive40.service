@@ -1,0 +1,15 @@
+[Unit]
+Description=Mount Google Drive (gdrive40)
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=notify
+ExecStart=/usr/bin/rclone mount gdrive40: %h/mnt/gdrive40 --vfs-cache-mode full
+ExecStop=/usr/bin/fusermount3 -u %h/mnt/gdrive40
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=default.target
+

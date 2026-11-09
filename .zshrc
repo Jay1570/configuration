@@ -13,7 +13,8 @@ export PATH
 
 export PATH="$PATH:$HOME/development/flutter/bin"
 export PATH="$PATH:$HOME/Android/Sdk/platform-tools"
-export CHROME_EXECUTABLE="brave"
+export PATH="$PATH:$HOME/Android/Sdk/cmdline-tools/latest/bin"
+export CHROME_EXECUTABLE="chromium"
 export PATH="$PATH:$HOME/development/flutter/bin:$HOME/development/flutter/bin/cache/dart-sdk/bin"
 export JAVA_HOME="/opt/android-studio/jbr"
 export PATH="$JAVA_HOME/bin:$PATH"

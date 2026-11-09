@@ -1,0 +1,92 @@
+" ============================================================================
+" .ideavimrc — mirrors VS Code vim keybindings (asvetliakov.vscode-neovim)
+" Place this file at ~/.ideavimrc
+" Requires plugins: IdeaVim, IdeaVim-EasyMotion, IdeaVim-Surround (bundled)
+" ============================================================================
+
+" --- Plugins (install via IntelliJ Settings > IdeaVim, or these lines) ---
+set easymotion
+set surround
+set highlightedyank
+set NERDTree
+
+" --- Leader ---
+let mapleader = " "
+
+" --- General behavior ---
+set clipboard+=unnamed      " vim.useSystemClipboard
+set ignorecase
+set smartcase
+set hlsearch
+set incsearch
+set relativenumber          " editor.lineNumbers: relative
+set scrolloff=8             " editor.cursorSurroundingLines (approx)
+set idearefactormode=keep
+
+" --- Highlighted yank duration (ms) ---
+let g:highlightedyank_highlight_duration = 200
+
+" --- Insert mode: jk to escape ---
+inoremap jk <Esc>
+
+" --- Clear search highlight ---
+nnoremap <Esc> :nohlsearch<CR>
+
+" --- File Explorer ---
+nnoremap <leader>pv :NERDTreeToggle<CR>
+
+" --- Window navigation (Ctrl+hjkl) ---
+nnoremap <C-h> <C-w>h
+nnoremap <C-l> <C-w>l
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+
+" --- File operations (mapped to IntelliJ actions) ---
+nnoremap <leader>ff :action GotoFile<CR>
+nnoremap <leader>fg :action FindInPath<CR>
+nnoremap <leader>fb :action Switcher<CR>
+nnoremap <leader><leader> :action Switcher<CR>
+
+" --- Code navigation ---
+nnoremap gd :action GotoDeclaration<CR>
+nnoremap gr :action FindUsages<CR>
+nnoremap gi :action GotoImplementation<CR>
+nnoremap gt :action GotoTypeDeclaration<CR>
+nnoremap K :action QuickJavaDoc<CR>
+
+" --- LSP / code actions ---
+nnoremap <leader>rn :action RenameElement<CR>
+nnoremap <leader>ca :action ShowIntentionActions<CR>
+nnoremap <leader>f :action ReformatCode<CR>
+
+" --- Splits ---
+nnoremap <leader>v :action SplitVertically<CR>
+nnoremap <leader>h :action SplitHorizontally<CR>
+
+" --- Diagnostics ---
+nnoremap <leader>q :action ActivateProblemsViewToolWindow<CR>
+nnoremap [d :action GotoPreviousError<CR>
+nnoremap ]d :action GotoNextError<CR>
+
+" --- Terminal ---
+nnoremap <leader>tt :action ActivateTerminalToolWindow<CR>
+
+" --- Buffer/Tab management ---
+nnoremap <leader>bd :action CloseContent<CR>
+nnoremap <Tab> :action NextTab<CR>
+nnoremap <S-Tab> :action PreviousTab<CR>
+
+" --- Telescope-like search ---
+nnoremap <leader>sf :action GotoFile<CR>
+nnoremap <leader>sg :action FindInPath<CR>
+nnoremap <leader>sh :action GotoSymbol<CR>
+
+" --- Visual mode ---
+vnoremap gc :action CommentByLineComment<CR>
+vnoremap <leader>ca :action ShowIntentionActions<CR>
+vnoremap > >gv
+vnoremap < <gv>
+
+" --- Status bar mode colors (requires IdeaVim status bar icon; IdeaVim
+" doesn't support per-mode statusline recoloring like VS Code's extension,
+" but the mode indicator is shown in the status bar icon/widget by default) ---
