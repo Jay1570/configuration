@@ -1,0 +1,14 @@
+{
+    "[dart]": {
+        "editor.rulers": [
+            80
+        ],
+        "editor.selectionHighlight": false,
+        "editor.suggestSelection": "first",
+        "editor.tabCompletion": "on",
+        "editor.wordBasedSuggestions": "off",
+        "editor.tabSize": 2,
+        "editor.insertSpaces": true,
+        "editor.defaultFormatter": "Dart-Code.dart-code"
+    }
+}

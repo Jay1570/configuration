@@ -1,4 +1,29 @@
+# Ignore all VS Code data
 .config/Code/*
+
+# Keep User directory
 !.config/Code/User/
+
+# Ignore User contents by default
 .config/Code/User/*
+
+# Track main profile settings
 !.config/Code/User/settings.json
+
+# Keep profiles directory
+!.config/Code/User/profiles/
+
+# Ignore profile contents by default
+.config/Code/User/profiles/*
+
+# Track profile settings and extensions
+!.config/Code/User/profiles/*/
+.config/Code/User/profiles/*/*
+!.config/Code/User/profiles/*/settings.json
+!.config/Code/User/profiles/*/extensions.json
+
+# Ignore VS Code databases
+*.vscdb
+*.vscdb.backup
+*.vscdb-wal
+*.vscdb-shm

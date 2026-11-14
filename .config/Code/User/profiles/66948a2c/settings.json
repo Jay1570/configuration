@@ -1,0 +1,9 @@
+{
+    "jdk.jdkhome": "/usr/lib/jvm/java-25-openjdk",
+    "[java]": {
+        "editor.defaultFormatter": "redhat.java"
+    },
+    "java.format.comments.enabled": true,
+    "jdk.telemetry.enabled": false,
+    "redhat.telemetry.enabled": false
+}
